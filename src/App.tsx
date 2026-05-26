@@ -39,16 +39,7 @@ const PortfolioUI = () => {
 
   const [activeSection, setActiveSection] = useState('hero');
 
-useEffect(() => {
-  if (isProjectOpen) {
-    // Clavamos el body para que no haya scroll de fondo
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none'; // Evita scroll táctil en iPhone
-  } else {
-    document.body.style.overflow = 'auto';
-    document.body.style.touchAction = 'auto';
-  }
-}, [isProjectOpen]);
+  // No locking scroll — contact/footer se ocultan cuando hay proyecto abierto
 
   // ScrollSpy
 
@@ -103,7 +94,7 @@ useEffect(() => {
 
   return (
     <div className={`relative bg-[#111115] text-gray-300 font-sans selection:bg-orange-500/30 selection:text-orange-500 min-h-screen selection:backdrop-blur-sm overflow-x-hidden w-full ${isProjectOpen ? 'md:overflow-auto overflow-hidden' : ''}`}>
-      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      {isLoading && <LoadingScreen onComplete={(selectedLang) => { setIsLoading(false); setLang(selectedLang); }} />}
 
       {/* Background Grid Pattern */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.2]" style={{ backgroundImage: `linear-gradient(to right, #f9741686 1px, transparent 1px), linear-gradient(to bottom, #f9741686 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
@@ -125,10 +116,10 @@ useEffect(() => {
         {/* MODIFICACIÓN: Pasamos el setter al componente Work */}
         <Work t={t} setIsProjectOpen={setIsProjectOpen} />
 
-        <Contact t={t} />
+        {!isProjectOpen && <Contact t={t} />}
       </div>
 
-      <Footer t={t} />
+      {!isProjectOpen && <Footer t={t} />}
     </div>
   );
 

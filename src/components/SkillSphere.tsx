@@ -10,22 +10,22 @@ interface Skill {
 }
 
 const SKILLS: Skill[] = [
-  // índice 0 — polo norte (poco movimiento en rotación Y)
-  { name: 'React',       color: '#61DAFB', img: '/projets/react-logo-png_seeklogo-507247-Photoroom.png' },
+  // índice 0-3 — polo norte (menos movimiento)
+  { name: 'Java',        color: '#5382a1', img: '/projets/java-logo-Photoroom.png' },
+  { name: 'MySQL',       color: '#4479A1', img: '/projets/mysql-6-logo-png-transparent-Photoroom.png' },
   { name: 'Angular',     color: '#DD0031', img: '/projets/java-logo-angular-angularjs-software-testing-template-computer-icons-computer-font-ppt-png-clipart-thumbnail-Photoroom.png', imgStyle: { transform: 'scale(1.2)' } },
+  { name: 'Python',      color: '#3776AB', img: '/projets/hd-python-logo-symbol-transparent-png-735811696257415dbkifcuokn-Photoroom.png' },
+  // índice 4-8 — zona ecuatorial (máximo movimiento)
+  { name: 'Node.js',     color: '#339933', img: '/projets/87-879058_formation-node-js-node-js-logo-vector-Photoroom.png' },
+  { name: 'React',       color: '#61DAFB', img: '/projets/react-logo-png_seeklogo-507247-Photoroom.png' },
   { name: 'TypeScript',  color: '#3178C6', img: '/projets/png-transparent-angularjs-typescript-javascript-vue-js-others-blue-angle-text-thumbnail-Photoroom.png', imgStyle: { transform: 'scale(1.2)' } },
+  { name: 'Tailwind',    color: '#06B6D4', img: '' },
   { name: 'JavaScript',  color: '#F7DF1E', img: '/projets/kisspng-javascript-clip-art-openclipart-logo-number-1713949408965-Photoroom.png' },
+  // índice 9-12 — polo sur (menos movimiento)
+  { name: 'Spring Boot', color: '#6DB33F', img: '/projets/spring-Photoroom.png' },
   { name: 'HTML5',       color: '#E34F26', img: '/projets/html5_23403-Photoroom.png' },
   { name: 'CSS3',        color: '#1572B6', img: '/projets/css-icon5555.logowik.com-Photoroom.png' },
-  // índice 6 — ecuador (máximo movimiento en rotación Y)
   { name: 'GitHub',      color: '#c9d1d9', img: '' },
-  { name: 'Node.js',     color: '#339933', img: '/projets/87-879058_formation-node-js-node-js-logo-vector-Photoroom.png' },
-  { name: 'Java',        color: '#5382a1', img: '/projets/java-logo-Photoroom.png' },
-  { name: 'Spring Boot', color: '#6DB33F', img: '/projets/spring-Photoroom.png' },
-  { name: 'Python',      color: '#3776AB', img: '/projets/hd-python-logo-symbol-transparent-png-735811696257415dbkifcuokn-Photoroom.png' },
-  { name: 'MySQL',       color: '#4479A1', img: '/projets/mysql-6-logo-png-transparent-Photoroom.png' },
-  // índice 12 — polo sur
-  { name: 'Tailwind',    color: '#06B6D4', img: '' },
 ];
 
 // Inline SVG fallbacks for skills without image files
@@ -213,7 +213,7 @@ export function SkillSphere() {
   return (
     <div
       className="relative select-none cursor-grab active:cursor-grabbing"
-      style={{ width: 460, height: 460 }}
+      style={{ width: 460, height: 460, touchAction: 'none' }}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={onRelease}
@@ -256,7 +256,7 @@ export function SkillSphere() {
             onMouseLeave={e => { e.stopPropagation(); setHovered(null); }}
           >
             <span
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full font-mono text-[11px] whitespace-nowrap border"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full font-mono text-[13px] whitespace-nowrap border"
               style={{
                 borderColor: isHov ? `${skill.color}80` : `${skill.color}40`,
                 background:  isHov ? `${skill.color}18` : `${skill.color}08`,

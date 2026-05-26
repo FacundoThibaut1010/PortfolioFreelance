@@ -6,7 +6,7 @@ export const About = ({ t, scrollTo }: { t: any, scrollTo: (id: string) => void 
   return (
     <section
       id="about"
-      className="min-h-screen w-full relative flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-0"
+      className="min-h-screen w-full relative flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 xl:px-0"
     >
       <div className="max-w-[85rem] mx-auto w-full">
         <motion.div

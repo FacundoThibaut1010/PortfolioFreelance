@@ -68,10 +68,11 @@ export const Work = ({ t, setIsProjectOpen }: { t: any, setIsProjectOpen: (val: 
   const mThumbNorm  = Math.max(36,  Math.floor((thumbsArea - mThumbExp) / (numProjects - 1)));
   const selectedProject = selectedProjectIndex !== null ? projects[selectedProjectIndex] : null;
 
-  useEffect(() => { setIsProjectOpen(false); }, [setIsProjectOpen]);
+  useEffect(() => { setIsProjectOpen(false); }, []);
 
   const handleSelect = (i: number) => {
     setSelectedProjectIndex(i);
+    setIsProjectOpen(true);
     setTimeout(() => {
       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 60);
@@ -80,6 +81,7 @@ export const Work = ({ t, setIsProjectOpen }: { t: any, setIsProjectOpen: (val: 
   const handleClose = () => {
     setSelectedProjectIndex(null);
     setHoveredIndex(null);
+    setIsProjectOpen(false);
     setTimeout(() => {
       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 60);
