@@ -83,11 +83,16 @@ export const Services = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative rounded-2xl flex flex-col overflow-hidden"
+                whileHover={{
+                  y: -12,
+                  boxShadow: `0 28px 70px ${svc.accent}28`,
+                  transition: { type: 'spring', stiffness: 280, damping: 22 },
+                }}
+                className="relative rounded-2xl flex flex-col overflow-hidden cursor-default"
                 style={{
                   background: '#111220',
                   border: svc.popular ? `1px solid ${svc.accent}` : '1px solid rgba(255,255,255,0.06)',
-                  boxShadow: svc.popular ? `0 0 40px ${svc.accent}22` : 'none',
+                  boxShadow: svc.popular ? `0 0 40px ${svc.accent}22` : '0 0 0px transparent',
                 }}
               >
                 {/* Top accent bar */}
@@ -136,18 +141,25 @@ export const Services = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
                   </ul>
 
                   {/* CTA */}
-                  <a
+                  <motion.a
                     href="https://wa.me/541171247355"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 text-white font-bold text-sm py-3.5 px-5 rounded-xl transition-all active:scale-95"
+                    className="flex items-center justify-center gap-2 text-white font-bold text-sm py-3.5 px-5 rounded-xl"
                     style={{
                       background: svc.popular ? svc.accent : 'rgba(255,255,255,0.06)',
                       border: svc.popular ? 'none' : `1px solid rgba(255,255,255,0.1)`,
                     }}
+                    whileHover={{
+                      scale: 1.04,
+                      boxShadow: `0 8px 30px ${svc.accent}45`,
+                      background: svc.popular ? svc.accent : `${svc.accent}20`,
+                    }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   >
                     EMPEZAR <ExternalLink size={14} />
-                  </a>
+                  </motion.a>
                 </div>
               </motion.div>
             );

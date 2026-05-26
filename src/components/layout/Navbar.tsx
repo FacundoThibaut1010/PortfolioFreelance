@@ -9,14 +9,7 @@ const NAV_LINKS = [
 ];
 
 export const Navbar = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
-  const [open, setOpen]         = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 24);
-    window.addEventListener('scroll', fn);
-    return () => window.removeEventListener('scroll', fn);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -27,12 +20,7 @@ export const Navbar = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'backdrop-blur-xl border-b border-white/5' : ''
-        }`}
-        style={{ background: scrolled ? 'rgba(10,11,20,0.92)' : 'transparent' }}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50" style={{ background: 'transparent' }}>
         <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
 
           {/* Logo */}
