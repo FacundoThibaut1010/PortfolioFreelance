@@ -202,34 +202,40 @@ export const Work = ({ t, setIsProjectOpen, lang, setLang }: { t: any, setIsProj
                   <motion.div className="w-full bg-orange-500 absolute top-0 left-0" style={{ height: progressWidth }} />
                 </div>
 
-                {/* Language toggle + close button stacked in top-right corner */}
-                <div className="fixed top-4 right-4 sm:right-6 z-[200] flex flex-col items-end gap-2">
-                  {/* EN/ES language toggle */}
-                  <div className="flex items-center bg-gray-900/90 backdrop-blur-sm border border-gray-700 rounded-full p-1">
+                {/* Project top nav bar — same style as main mobile nav */}
+                <div className="fixed top-0 left-0 right-0 z-[200] bg-[#0f0f12]/85 backdrop-blur-xl border-b border-gray-800/60 py-3 px-5 flex items-center justify-between">
+                  {/* Close button — left */}
+                  <button
+                    onClick={handleClose}
+                    className="flex items-center gap-2 text-gray-300 hover:text-orange-500 transition-colors text-xs font-mono tracking-widest uppercase active:scale-95"
+                  >
+                    <X size={16} /> {t.work_modal_close}
+                  </button>
+
+                  {/* Project name — center */}
+                  <span className="text-orange-500 font-mono text-[10px] font-bold uppercase tracking-widest truncate max-w-[130px] text-center">
+                    {selectedProject.name}
+                  </span>
+
+                  {/* EN/ES toggle — right */}
+                  <div className="flex items-center bg-gray-900/80 border border-gray-700/60 rounded-full p-1">
                     <button
                       onClick={() => setLang('en')}
-                      className={`px-3 py-1.5 rounded-full text-[10px] font-mono font-bold transition-all duration-300 ${lang === 'en' ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)]' : 'text-gray-500 hover:text-gray-300'}`}
+                      className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold transition-all duration-300 ${lang === 'en' ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.4)]' : 'text-gray-500 hover:text-gray-300'}`}
                     >
                       EN
                     </button>
                     <button
                       onClick={() => setLang('es')}
-                      className={`px-3 py-1.5 rounded-full text-[10px] font-mono font-bold transition-all duration-300 ${lang === 'es' ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)]' : 'text-gray-500 hover:text-gray-300'}`}
+                      className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold transition-all duration-300 ${lang === 'es' ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(37,99,235,0.4)]' : 'text-gray-500 hover:text-gray-300'}`}
                     >
                       ES
                     </button>
                   </div>
-                  {/* Close button */}
-                  <button
-                    onClick={handleClose}
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900/90 backdrop-blur-sm border border-gray-700 text-gray-300 hover:text-white hover:border-orange-500 transition-all text-xs font-mono tracking-widest uppercase"
-                  >
-                    <X size={14} /> {t.work_modal_close}
-                  </button>
                 </div>
 
                 {/* Panel 1 — Thumbnail congelado + texto gigante (igual al hover) */}
-                <div className="flex flex-col items-center gap-0 mt-28 sm:mt-28">
+                <div className="flex flex-col items-center gap-0 mt-20">
                   {/* Thumbnail fijo al tamaño hover — responsive on mobile */}
                   <div
                     className="relative overflow-hidden rounded-2xl w-full"
