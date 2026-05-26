@@ -22,6 +22,14 @@ export const Navigation = ({ t, activeSection, scrollTo, sections, lang, setLang
 
   }, []);
 
+  useEffect(() => {
+
+    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
+
+    return () => { document.body.style.overflow = ''; };
+
+  }, [isMobileOpen]);
+
 
 
   return (
@@ -30,9 +38,9 @@ export const Navigation = ({ t, activeSection, scrollTo, sections, lang, setLang
 
       {/* --- 1. DESKTOP NAVIGATION (Lado derecho, fijo) --- */}
 
-      <div className="fixed right-8 top-1/2 -translate-y-1/2 flex-col items-center z-50 mix-blend-screen hidden lg:flex">
+      <div className="fixed right-2 top-1/2 -translate-y-1/2 flex-col items-center z-50 mix-blend-screen hidden lg:flex">
 
-        <div className="absolute w-px bg-gray-800 top-4 bottom-24 -z-10"></div>
+        <div className="absolute w-px bg-gray-800 inset-y-8 -z-10"></div>
 
         {sections.map((sec) => {
 
@@ -58,7 +66,7 @@ export const Navigation = ({ t, activeSection, scrollTo, sections, lang, setLang
 
             <div key={sec} className="relative group w-16 h-16 flex items-center justify-center">
 
-              <div className="absolute right-14 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-center justify-center bg-[#1e1e24] border border-gray-700/50 rounded-md px-4 py-2 shadow-xl whitespace-nowrap">
+              <div className="absolute right-16 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-center justify-center bg-[#1e1e24] border border-gray-700/50 rounded-md px-4 py-2 shadow-xl whitespace-nowrap">
 
                 <span className="text-orange-500 font-mono text-sm mr-2 font-bold">&gt;</span>
 
@@ -98,20 +106,6 @@ export const Navigation = ({ t, activeSection, scrollTo, sections, lang, setLang
 
         })}
 
-        {/* Avatar al final del Nav de Desktop */}
-
-        <div className="mt-12 relative w-16 h-16 flex items-center justify-center group cursor-pointer" onClick={() => scrollTo('contact')}>
-
-          <div className="absolute inset-0 rounded-full border border-orange-500/30 border-dotted animate-[spin_15s_linear_infinite]"></div>
-
-          <div className="w-14 h-14 rounded-full bg-[#111115] border border-gray-700 overflow-hidden z-10 p-0.5 group-hover:border-orange-500 transition-colors">
-
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4" className="w-full h-full rounded-full object-cover grayscale brightness-90 contrast-125" alt="Profile" />
-
-          </div>
-
-        </div>
-
       </div>
 
 
@@ -140,9 +134,9 @@ export const Navigation = ({ t, activeSection, scrollTo, sections, lang, setLang
 
           <div className="flex items-center gap-3">
 
-            <div className={`w-9 h-9 rounded-xl bg-orange-500 flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-transform ${!scrolled && 'scale-90 opacity-80'}`}>
+            <div className={`w-9 h-9 rounded-xl overflow-hidden border border-orange-500/60 shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-transform ${!scrolled && 'scale-90 opacity-80'}`}>
 
-              <span className="text-[#0f0f12] font-mono font-black text-lg">P</span>
+              <img src="/projets/avatarFacu.jpeg" alt="Facundo" className="w-full h-full object-cover" />
 
             </div>
 
@@ -154,9 +148,7 @@ export const Navigation = ({ t, activeSection, scrollTo, sections, lang, setLang
 
               <div className="flex flex-col animate-in fade-in slide-in-from-left-2 duration-300">
 
-                <span className="text-white font-mono text-[10px] font-bold tracking-[0.2em] uppercase">Señor Pivaudo</span>
-
-                <span className="text-orange-500 font-mono text-[9px] font-medium uppercase tracking-widest opacity-80">
+                <span className="text-orange-500 font-mono text-[10px] font-medium uppercase tracking-widest opacity-80">
 
                   {t[`nav_${activeSection}`] || activeSection}
 

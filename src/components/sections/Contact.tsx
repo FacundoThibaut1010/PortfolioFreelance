@@ -12,7 +12,7 @@ export const Contact = ({ t }: { t: any }) => {
 
   const handleWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
-    const telefono = "54971247355"; // <--- CAMBIÁ POR TU CELULAR
+    const telefono = "541171247355";
     const texto = `Hola! Mi nombre es *${formData.name}*.%0A%0A` +
       `Te escribo por el siguiente asunto: *${formData.subject}*.%0A%0A` +
       `*Mensaje:* ${formData.message}%0A%0A` +
@@ -38,7 +38,7 @@ export const Contact = ({ t }: { t: any }) => {
           {/* Texto: Mismas clases text-4xl lg:text-5xl y font-mono */}
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-mono text-gray-200 font-bold flex items-center gap-4">
             <span className="text-orange-500 font-bold">$</span>
-            contact.exe
+            {t.contact_title}
           </h2>
         </div>
 

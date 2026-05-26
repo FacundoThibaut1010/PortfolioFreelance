@@ -8,22 +8,27 @@ export const translations = {
     nav_work: "Projects",
     nav_contact: "Contact",
     hero_status: "SYSTEM.KERNEL :: v2.5.0 ONLINE",
+    hero_schedule: "SCHEDULE",
     hero_hello: "Hello, I'm",
-    hero_title: "Software Developer",
-    hero_desc1: "Engineering Beyond Boundaries.",
-    hero_desc2: "Specializing in distributed systems, real-time architecture, and high-performance applications.",
-    hero_btn_init: "Initialize OS",
+    hero_title: "Full-Stack Web Developer",
+    hero_desc1: "Development of scalable and high-performance web applications.",
+    hero_desc2: "Specialized in creating efficient digital solutions, from server architecture to the last detail of the user interface.",
+    hero_btn_init: "WhatsApp",
     hero_btn_check: "Check out",
 
     ide_prop_name: "name",
     ide_prop_role: "role",
     ide_prop_passion: "passion",
     ide_val_name: "Facundo Thibaut",
-    ide_val_role: "Full Stack Engineer",
-    ide_val_passion: "Engineering Beyond Boundaries",
+    ide_val_role: "Full Stack Developer",
+    ide_val_passion: "Web Developer",
     skills_interactive: "Interactive Tech Stack",
+    skills_title: "Skills",
     ide_welcome: "Welcome to my workspace",
-    
+
+    about_title: "About",
+    about_dev_role: "WEB_DEVELOPER",
+
     footer_role: "Software Engineer",
     footer_built_1: "Built with ",
     footer_built_2: " using Next.js, TypeScript & Tailwind",
@@ -38,14 +43,9 @@ export const translations = {
     about_location_val: "Argentina, Planet Earth",
     about_status: "Status",
     about_status_val: "OPEN",
-    
-    about_whoami_desc: "Software Engineer specializing in end-to-end web applications and POS systems from React/Next.js frontends to NestJS, Spring Boot backends, and AWS infrastructure. Currently engineering scalable, production-grade solutions while taking on freelance projects that demand clean architecture and real delivery.",
-    about_mission_desc_1: "Translating complex business requirements into robust technical solutions. Currently focused on ",
-    about_mission_desc_2: "Microservices",
-    about_mission_comma: ", ",
-    about_mission_desc_3: "Real-time Systems",
-    about_mission_and: ", and ",
-    about_mission_desc_4: "AI Integration",
+
+    about_whoami_desc: "As a Full-Stack Developer, I dedicate myself to building and optimizing high-performance web applications. My experience covers the entire software lifecycle: from defining backend architecture and integrating essential services, to developing fast, intuitive, and responsive user interfaces.",
+    about_mission_desc_1: "My work philosophy is based on structure, scalability, and clean code. I am motivated by facing complex technical challenges, implementing efficient backend solutions that support business logic, and ensuring a flawless user experience on the client side. I am focused on developing robust and stable platforms, bringing a comprehensive vision to every project I participate in.",
 
     metric_exp: "EXPERIENCE",
     metric_exp_sub: "YRS",
@@ -55,14 +55,22 @@ export const translations = {
     metric_caf_sub: "CUPS",
 
     work_title: "Selected Work",
+    work_big_label: "PROJECTS",
     proj_type_web: "WEB DEVELOPMENT",
     proj_desc: "Realistic casino simulator with betting system and official rules. Offers a dynamic experience where the user competes against an automated dealer following real game strategies, all under an agile and modern interface.",
     proj_long_desc: "A realistic casino simulator that integrates Mercado Pago payments for balance top-up and an achievement system to reward your strategy. Features a high-precision game engine, automated dealer under international rules, and a detailed betting history for a complete and dynamic user experience.",
     work_preview_source: "Data Source",
     work_preview_esc: "ESC to exit // Click to expand",
-    work_modal_view: "VIEW SOURCE",
+    work_modal_view: "VIEW PROJECT",
+    work_about_project: "About this project",
     work_modal_close: "CLOSE",
+    newave_desc: "Full development of an e-commerce platform for the Newave supplements brand, focused on load speed and user trust.",
+    newave_long_desc: "Full development of an e-commerce platform born from the Newave team's need to position their supplements brand in the digital market. I designed and implemented a robust, responsive full-stack solution, focused on load speed and user trust. The system automates the sales flow through the integration of a secure checkout with Mercado Pago, offering a reliable environment to process payments efficiently on any device.",
 
+    invitacion_desc: "A digital wedding invitation that replaces the traditional physical card, designed to share in a single link.",
+    invitacion_long_desc: "A digital wedding invitation that replaces the traditional physical card. Real-time countdown to the big day, photo gallery, venue information with direct Google Maps access, and RSVP feature so the couple knows who's coming. Designed to share in a single link — elegant, fully personalized, and always up to date.",
+
+    contact_title: "Contact",
     contact_json_status_key: "\"status\"",
     contact_json_status_val: "\"open_to_work\"",
     contact_json_loc_key: "\"location\"",
@@ -76,7 +84,11 @@ export const translations = {
     contact_subject: "Subject",
     contact_subject_placeholder: "Project inquiry",
     contact_message: "Message",
-    contact_message_placeholder: "Tell me about your project..."
+    contact_message_placeholder: "Tell me about your project...",
+
+    about_cmd_header: "user_profile.log",
+    about_cmd_whoami: "whoami",
+    about_cmd_mission_file: "philosophy"
   },
   es: {
     nav_hero: "Inicio",
@@ -85,11 +97,12 @@ export const translations = {
     nav_work: "Proyectos",
     nav_contact: "Contacto",
     hero_status: "SISTEMA.KERNEL :: v2.5.0 EN LÍNEA",
+    hero_schedule: "HORARIO",
     hero_hello: "Hola, soy",
-    hero_title: "Desarrollador de Software",
-    hero_desc1: "Ingeniería Sin Fronteras.",
-    hero_desc2: "Especializado en sistemas distribuidos, arquitectura en tiempo real y aplicaciones de alto rendimiento.",
-    hero_btn_init: "Inicializar SO",
+    hero_title: "Desarrollador Full-Stack Web",
+    hero_desc1: "Desarrollo de aplicaciones web escalables y de alto rendimiento.",
+    hero_desc2: "Especializado en crear soluciones digitales eficientes, desde la arquitectura del servidor hasta el último detalle de la interfaz de usuario.",
+    hero_btn_init: "WhatsApp",
     hero_btn_check: "Mira mi",
 
     ide_prop_name: "nombre",
@@ -97,10 +110,14 @@ export const translations = {
     ide_prop_passion: "pasion",
     ide_val_name: "Facundo Thibaut",
     ide_val_role: "Desarrollador Full Stack",
-    ide_val_passion: "Ingeniería Sin Fronteras",
+    ide_val_passion: "Desarrollador Web",
     skills_interactive: "Stack Tecnológico Interactivo",
+    skills_title: "Habilidades",
     ide_welcome: "Bienvenido a mi espacio de trabajo",
-    
+
+    about_title: "Sobre mí",
+    about_dev_role: "DESARROLLADOR_WEB",
+
     footer_role: "Ingeniero de Software",
     footer_built_1: "Construido con ",
     footer_built_2: " usando Next.js, TypeScript y Tailwind",
@@ -115,14 +132,9 @@ export const translations = {
     about_location_val: "Argentina, Planeta Tierra",
     about_status: "Estado",
     about_status_val: "DISPONIBLE",
-    
-    about_whoami_desc: "Ingeniero de Software especializado en aplicaciones web de extremo a extremo y sistemas POS, desde el frontend con React/Next.js hasta el backend con NestJS, Spring Boot e infraestructura en AWS. Actualmente desarrollando soluciones escalables a nivel de producción y aceptando proyectos freelance que exijan arquitectura limpia y resultados reales.",
-    about_mission_desc_1: "Traduciendo requerimientos de negocio complejos en soluciones técnicas robustas. Actualmente enfocado en ",
-    about_mission_desc_2: "Microservicios",
-    about_mission_comma: ", ",
-    about_mission_desc_3: "Sistemas en Tiempo Real",
-    about_mission_and: " e ",
-    about_mission_desc_4: "Integración de IA",
+
+    about_whoami_desc: "Como Desarrollador Full-Stack, me dedico a la creación y optimización de aplicaciones web de alto rendimiento. Mi experiencia abarca todo el ciclo de vida del software: desde la definición de la arquitectura del backend y la integración de servicios esenciales, hasta el desarrollo de interfaces de usuario rápidas, intuitivas y responsivas.",
+    about_mission_desc_1: "Mi filosofía de trabajo se basa en la estructura, la escalabilidad y el código limpio. Me motiva enfrentar desafíos técnicos complejos, implementar soluciones eficientes de backend que soporten la lógica del negocio y asegurar una experiencia de usuario impecable en el cliente. Estoy enfocado en el desarrollo de plataformas robustas y estables, aportando una visión integral en cada proyecto en el que participo.",
 
     metric_exp: "EXPERIENCIA",
     metric_exp_sub: "AÑOS",
@@ -132,14 +144,22 @@ export const translations = {
     metric_caf_sub: "TAZAS",
 
     work_title: "Proyectos Destacados",
+    work_big_label: "PROYECTOS",
     proj_type_web: "DESARROLLO WEB",
     proj_desc: "Simulador de casino realista con sistema de apuestas y reglas oficiales. Ofrece una experiencia dinámica donde el usuario compite contra una banca automatizada que sigue estrategias de juego reales, todo bajo una interfaz ágil y moderna.",
     proj_long_desc: "Un simulador de casino realista que integra pagos con Mercado Pago para recarga de saldo y un sistema de logros para premiar tu estrategia. Cuenta con un motor de juego de alta precisión, banca automatizada bajo reglas internacionales y un historial detallado de apuestas para una experiencia de usuario completa y dinámica.",
     work_preview_source: "Fuente de Datos",
     work_preview_esc: "ESC para salir // Click para expandir",
-    work_modal_view: "VER CÓDIGO",
+    work_modal_view: "VER PROYECTO",
+    work_about_project: "Sobre este proyecto",
     work_modal_close: "CERRAR",
+    newave_desc: "Desarrollo integral de una plataforma de comercio electrónico para la marca de suplementos Newave, enfocada en velocidad de carga y confianza del usuario.",
+    newave_long_desc: "Desarrollo integral de una plataforma de comercio electrónico nacida de la necesidad del equipo de Newave de posicionar su marca de suplementos en el mercado digital. Diseñé e implementé una solución full-stack robusta y responsiva, enfocada en la velocidad de carga y la confianza del usuario. El sistema automatiza el flujo de ventas mediante la integración de checkout seguro con Mercado Pago, ofreciendo un entorno confiable para procesar pagos de forma eficiente en cualquier dispositivo.",
 
+    invitacion_desc: "Una invitación de boda digital que reemplaza la tarjeta física tradicional, diseñada para compartir en un solo link.",
+    invitacion_long_desc: "Una invitación de boda digital que reemplaza la tarjeta física tradicional. Cuenta regresiva en tiempo real hasta el gran día, galería de fotos, información del venue con acceso directo en Google Maps, y confirmación de asistencia para que los novios sepan quiénes van. Diseñada para compartir en un solo link — elegante, completamente personalizada y siempre al día.",
+
+    contact_title: "Contacto",
     contact_json_status_key: "\"estado\"",
     contact_json_status_val: "\"disponible\"",
     contact_json_loc_key: "\"ubicación\"",
@@ -153,6 +173,10 @@ export const translations = {
     contact_subject: "Asunto",
     contact_subject_placeholder: "Consulta de proyecto",
     contact_message: "Mensaje",
-    contact_message_placeholder: "Contame sobre tu proyecto..."
+    contact_message_placeholder: "Contame sobre tu proyecto...",
+
+    about_cmd_header: "perfil_usuario.log",
+    about_cmd_whoami: "quién-soy",
+    about_cmd_mission_file: "filosofia"
   }
 };

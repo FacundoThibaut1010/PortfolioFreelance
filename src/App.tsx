@@ -4,6 +4,8 @@ import { translations, TranslationKey } from './data/translations';
 
 import { Navigation } from './components/layout/Navigation';
 
+import { LoadingScreen } from './components/LoadingScreen';
+
 import { LanguageSelector } from './components/layout/LanguageSelector';
 
 import { Footer } from './components/layout/Footer';
@@ -32,14 +34,29 @@ const PortfolioUI = () => {
 
   const [isProjectOpen, setIsProjectOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const [activeSection, setActiveSection] = useState('hero');
 
-
+useEffect(() => {
+  if (isProjectOpen) {
+    // Clavamos el body para que no haya scroll de fondo
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none'; // Evita scroll táctil en iPhone
+  } else {
+    document.body.style.overflow = 'auto';
+    document.body.style.touchAction = 'auto';
+  }
+}, [isProjectOpen]);
 
   // ScrollSpy
 
   useEffect(() => {
+
+
+
+    
     const observer = new IntersectionObserver((entries) => {
       // 1. Filtramos solo las secciones que se están viendo
       const visibleSections = entries.filter(entry => entry.isIntersecting);
@@ -86,6 +103,7 @@ const PortfolioUI = () => {
 
   return (
     <div className={`relative bg-[#111115] text-gray-300 font-sans selection:bg-orange-500/30 selection:text-orange-500 min-h-screen selection:backdrop-blur-sm overflow-x-hidden w-full ${isProjectOpen ? 'md:overflow-auto overflow-hidden' : ''}`}>
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
 
       {/* Background Grid Pattern */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.2]" style={{ backgroundImage: `linear-gradient(to right, #f9741686 1px, transparent 1px), linear-gradient(to bottom, #f9741686 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />

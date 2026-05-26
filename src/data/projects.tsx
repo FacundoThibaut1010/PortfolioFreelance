@@ -24,7 +24,25 @@ export const getProjects = (t: any) => [
     github: 'https://github.com/Miagomez1/blackjack-unlam',
     desc: t.proj_desc,
     longDesc: t.proj_long_desc,
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800',
+    image: '/projets/FotoBlackJack.png',
     tech: ['Java', 'HTML', 'CSS', 'Javascript', 'Spring mvc', 'MySql']
+  },
+  {
+    name: 'Newave',
+    type: t.proj_type_web,
+    github: 'https://newave-suplementos.vercel.app',
+    desc: t.newave_desc,
+    longDesc: t.newave_long_desc,
+    image: '/projets/newave.png',
+    tech: ['React', 'TypeScript', 'JavaScript', 'CSS', 'HTML', 'SQLite']
+  },
+  {
+    name: 'Invitación Digital',
+    type: t.proj_type_web,
+    github: 'https://invitacion-muestra.vercel.app/',
+    desc: t.invitacion_desc,
+    longDesc: t.invitacion_long_desc,
+    image: '/projets/invitacionDigital.png',
+    tech: ['React.js', 'Framer Motion', 'Vite']
   }
 ];

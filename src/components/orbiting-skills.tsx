@@ -346,7 +346,7 @@ export function OrbitingSkillsGlobe() {
     <main className="w-full flex items-center justify-center py-20">
       <div
         // Aumentamos el alto mínimo (min-h) para que el brillo respire
-        className="relative w-full aspect-square max-w-[650px] min-h-[550px] md:min-h-[600px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none overflow-visible"
+        className="relative w-full aspect-square max-w-[650px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none overflow-visible"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
