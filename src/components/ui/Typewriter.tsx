@@ -19,12 +19,13 @@ export const Typewriter = ({
   const [prevText, setPrevText] = useState(text);
 
   // reset when language switches
+  // If trigger hasn't fired yet, keep text hidden; if animation already played, show new lang immediately
   useEffect(() => {
     if (text !== prevText) {
-      setDisplayedText(text);
+      setDisplayedText(trigger ? text : "");
       setPrevText(text);
     }
-  }, [text, prevText]);
+  }, [text, prevText, trigger]);
 
   // start delay only when trigger is true
   useEffect(() => {

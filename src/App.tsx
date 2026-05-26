@@ -111,9 +111,9 @@ const PortfolioUI = () => {
       )}
 
       <div className="relative z-10 w-full flex flex-col">
-        <Hero t={t} scrollTo={scrollTo} />
-        <About t={t} scrollTo={scrollTo} />
-        <Skills t={t} />
+        {!isProjectOpen && <Hero t={t} scrollTo={scrollTo} />}
+        {!isProjectOpen && <About t={t} scrollTo={scrollTo} />}
+        {!isProjectOpen && <Skills t={t} />}
 
         {/* MODIFICACIÓN: Pasamos el setter al componente Work */}
         <Work t={t} setIsProjectOpen={setIsProjectOpen} lang={lang} setLang={setLang} />
