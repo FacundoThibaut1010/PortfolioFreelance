@@ -116,7 +116,7 @@ const PortfolioUI = () => {
         <Skills t={t} />
 
         {/* MODIFICACIÓN: Pasamos el setter al componente Work */}
-        <Work t={t} setIsProjectOpen={setIsProjectOpen} />
+        <Work t={t} setIsProjectOpen={setIsProjectOpen} lang={lang} setLang={setLang} />
 
         {!isProjectOpen && <Contact t={t} />}
       </div>

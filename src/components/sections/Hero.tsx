@@ -198,14 +198,14 @@ export const Hero = ({ t, scrollTo }: { t: any, scrollTo: (id: string) => void }
                 </div>
 
                 <div className="ml-12">
-                  <span className="text-[#e06c75]">{t.ide_prop_role}</span><span className="text-[#56b6c2]">=</span>
+                  <span className="text-[#e06c75]"><Typewriter text={t.ide_prop_role} delay={3100} showCursor={false} trigger={codeActive} /></span><span className="text-[#56b6c2]">=</span>
                   <span className="text-[#98c379]">"</span>
                   <span className="text-[#98c379]"><Typewriter text={t.ide_val_role} delay={3200} showCursor={true} trigger={codeActive} /></span>
                   <span className="text-[#98c379]">"</span>
                 </div>
 
                 <div className="ml-12">
-                  <span className="text-[#e06c75]">{t.ide_prop_passion}</span><span className="text-[#56b6c2]">=</span>
+                  <span className="text-[#e06c75]"><Typewriter text={t.ide_prop_passion} delay={4300} showCursor={false} trigger={codeActive} /></span><span className="text-[#56b6c2]">=</span>
                   <span className="text-[#98c379]">"</span>
                   <span className="text-[#98c379]"><Typewriter text={t.ide_val_passion} delay={4400} showCursor={true} trigger={codeActive} /></span>
                   <span className="text-[#98c379]">"</span>

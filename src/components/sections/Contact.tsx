@@ -113,8 +113,8 @@ export const Contact = ({ t }: { t: any }) => {
 
                 <div className="pl-10 h-[24px] leading-[24px]">
                   <span className="text-[#ef8b51]">"instagram"</span>:
-                  <a href="https://www.instagram.com/facuthibaut_/" target="_blank" className="text-[#c678dd] hover:text-white transition-colors ml-1">
-                    "@facuthibaut_"
+                  <a href="https://www.instagram.com/facuthibaut.dev/" target="_blank" className="text-[#c678dd] hover:text-white transition-colors ml-1">
+                    "@facuthibaut.dev"
                   </a>
                 </div>
 
