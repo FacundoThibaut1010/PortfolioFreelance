@@ -14,7 +14,7 @@ export default function App() {
   };
 
   return (
-    <div className="text-slate-900 font-sans overflow-x-hidden selection:bg-blue-100 selection:text-blue-700">
+    <div className="font-sans overflow-x-hidden" style={{ background: '#0a0b14' }}>
       <Navbar scrollTo={scrollTo} />
       <Hero scrollTo={scrollTo} />
       <Services scrollTo={scrollTo} />

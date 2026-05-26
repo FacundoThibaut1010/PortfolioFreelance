@@ -37,7 +37,7 @@ export const Process = () => {
     <section
       id="proceso"
       className="py-20 sm:py-28 px-5 sm:px-8 relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #0f1629 0%, #131d3b 100%)' }}
+      style={{ background: '#0a0b14' }}
     >
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full opacity-[0.06] pointer-events-none"
