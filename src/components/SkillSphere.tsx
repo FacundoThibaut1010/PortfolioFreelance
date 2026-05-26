@@ -156,7 +156,9 @@ export function SkillSphere() {
   const [paused, setPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
-  const mouse = useRef({ x: 0, y: 0 });
+  const mouse         = useRef({ x: 0, y: 0 });
+  const containerRef  = useRef<HTMLDivElement>(null);
+  const touchInSphere = useRef(false);
 
   useEffect(() => {
     if (paused) return;
@@ -171,6 +173,55 @@ export function SkillSphere() {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [paused]);
+
+  // Native touch listeners — only rotate when touch starts inside the sphere circle
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const isInsideSphere = (clientX: number, clientY: number) => {
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width  / 2;
+      const cy = rect.top  + rect.height / 2;
+      const r  = Math.min(rect.width, rect.height) / 2;
+      return Math.sqrt((clientX - cx) ** 2 + (clientY - cy) ** 2) <= r;
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      const { clientX, clientY } = e.touches[0];
+      if (!isInsideSphere(clientX, clientY)) { touchInSphere.current = false; return; }
+      touchInSphere.current = true;
+      e.preventDefault();
+      setPaused(true);
+      mouse.current = { x: clientX, y: clientY };
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!touchInSphere.current) return;
+      e.preventDefault();
+      const { clientX, clientY } = e.touches[0];
+      const dx = clientX - mouse.current.x;
+      const dy = clientY - mouse.current.y;
+      mouse.current = { x: clientX, y: clientY };
+      setRot(r => ({ x: r.x - dy * 0.005, y: r.y + dx * 0.005 }));
+    };
+
+    const onTouchEnd = () => {
+      if (!touchInSphere.current) return;
+      touchInSphere.current = false;
+      setDragging(false);
+      setPaused(false);
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
+    el.addEventListener('touchmove',  onTouchMove,  { passive: false });
+    el.addEventListener('touchend',   onTouchEnd);
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove',  onTouchMove);
+      el.removeEventListener('touchend',   onTouchEnd);
+    };
+  }, []);
 
   const onMouseDown = useCallback((e: React.MouseEvent) => {
     setDragging(true);
@@ -192,18 +243,6 @@ export function SkillSphere() {
     setPaused(false);
   }, []);
 
-  const onTouchStart = useCallback((e: React.TouchEvent) => {
-    setPaused(true);
-    mouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  }, []);
-
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    const dx = e.touches[0].clientX - mouse.current.x;
-    const dy = e.touches[0].clientY - mouse.current.y;
-    mouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    setRot(r => ({ x: r.x - dy * 0.005, y: r.y + dx * 0.005 }));
-  }, []);
-
   // Proyectar y ordenar de atrás hacia adelante (painter's algorithm)
   const items = POSITIONS.map((pos, i) => {
     const { sx, sy, depth } = project3D(pos, rot.x, rot.y);
@@ -212,15 +251,13 @@ export function SkillSphere() {
 
   return (
     <div
+      ref={containerRef}
       className="relative select-none cursor-grab active:cursor-grabbing"
-      style={{ width: 460, height: 460, touchAction: 'none' }}
+      style={{ width: 460, height: 460 }}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={onRelease}
       onMouseLeave={onRelease}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onRelease}
     >
       {/* Ambient center glow */}
       <div

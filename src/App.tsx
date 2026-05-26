@@ -104,9 +104,11 @@ const PortfolioUI = () => {
         <Navigation t={t} activeSection={activeSection} scrollTo={scrollTo} sections={sections} lang={lang} setLang={setLang} />
       )}
 
-      <div className="hidden lg:block">
-        <LanguageSelector lang={lang} setLang={setLang} />
-      </div>
+      {!isProjectOpen && (
+        <div className="hidden lg:block">
+          <LanguageSelector lang={lang} setLang={setLang} />
+        </div>
+      )}
 
       <div className="relative z-10 w-full flex flex-col">
         <Hero t={t} scrollTo={scrollTo} />

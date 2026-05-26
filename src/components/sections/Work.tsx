@@ -168,7 +168,7 @@ export const Work = ({ t, setIsProjectOpen }: { t: any, setIsProjectOpen: (val: 
                 </div>
 
                 {/* Giant label */}
-                <div className="w-full text-center overflow-hidden pointer-events-none" style={{ marginTop: isMobile ? '1em' : '-0.15em' }}>
+                <div className="w-full text-center overflow-hidden pointer-events-none" style={{ marginTop: isMobile ? '1em' : '0.3em' }}>
                   <AnimatePresence mode="wait">
                     <motion.p
                       key={hoveredIndex ?? 'default'}
@@ -179,7 +179,7 @@ export const Work = ({ t, setIsProjectOpen }: { t: any, setIsProjectOpen: (val: 
                       className="font-mono font-black tracking-tighter leading-[0.9] select-none break-words"
                       style={{
                         fontSize: 'clamp(2.2rem, 10vw, 14rem)',
-                        color: hoveredIndex !== null ? '#f97316' : 'rgba(255,255,255,0.05)',
+                        color: hoveredIndex !== null ? '#f97316' : (isMobile ? 'rgba(249,115,22,0.18)' : 'rgba(255,255,255,0.05)'),
                       }}
                     >
                       {hoveredIndex !== null ? projects[hoveredIndex].name.toUpperCase() : t.work_big_label}
@@ -208,7 +208,7 @@ export const Work = ({ t, setIsProjectOpen }: { t: any, setIsProjectOpen: (val: 
                 {/* Close button — below the EN/ES selector (top-4 right-4 ~36px tall) */}
                 <button
                   onClick={handleClose}
-                  className="fixed top-20 right-4 sm:right-6 z-[200] flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900/90 backdrop-blur-sm border border-gray-700 text-gray-300 hover:text-white hover:border-orange-500 transition-all text-xs font-mono tracking-widest uppercase"
+                  className="fixed top-5 right-4 sm:right-6 z-[200] flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900/90 backdrop-blur-sm border border-gray-700 text-gray-300 hover:text-white hover:border-orange-500 transition-all text-xs font-mono tracking-widest uppercase"
                 >
                   <X size={14} /> {t.work_modal_close}
                 </button>
@@ -224,7 +224,7 @@ export const Work = ({ t, setIsProjectOpen }: { t: any, setIsProjectOpen: (val: 
                   </div>
 
                   {/* Texto gigante naranja — igual al hover state */}
-                  <div className="w-full text-center overflow-hidden pointer-events-none" style={{ marginTop: isMobile ? '0.6em' : '-0.15em' }}>
+                  <div className="w-full text-center overflow-hidden pointer-events-none" style={{ marginTop: isMobile ? '0.6em' : '0.4em' }}>
                     <p
                       className="font-mono font-black tracking-tighter leading-[0.9] select-none break-words"
                       style={{ fontSize: 'clamp(2.2rem, 10vw, 14rem)', color: '#f97316' }}

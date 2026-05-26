@@ -158,7 +158,7 @@ export const Hero = ({ t, scrollTo }: { t: any, scrollTo: (id: string) => void }
                 <div>
                   <span className="text-gray-500">// </span>
                   <span className="text-gray-500 italic">
-                    <Typewriter text={t.ide_welcome} delay={500} showCursor={true} trigger={codeActive} />
+                    <Typewriter text={t.ide_welcome} delay={200} showCursor={true} trigger={codeActive} />
                   </span>
                 </div>
 
@@ -167,7 +167,7 @@ export const Hero = ({ t, scrollTo }: { t: any, scrollTo: (id: string) => void }
                   <span className="text-[#e5c07b]">&#123; Developer &#125;</span>{' '}
                   <span className="text-[#c678dd]">from</span>{' '}
                   <span className="text-[#98c379]">
-                    '<Typewriter text="./universe" delay={2000} showCursor={true} trigger={codeActive} />'
+                    '<Typewriter text="./universe" delay={1000} showCursor={true} trigger={codeActive} />'
                   </span>
                   <span className="text-gray-400">;</span>
                 </div>
@@ -193,21 +193,21 @@ export const Hero = ({ t, scrollTo }: { t: any, scrollTo: (id: string) => void }
                 <div className="ml-12">
                   <span className="text-[#e06c75]">{t.ide_prop_name}</span><span className="text-[#56b6c2]">=</span>
                   <span className="text-[#98c379]">"</span>
-                  <span className="text-[#98c379]"><Typewriter text={t.ide_val_name} delay={3500} showCursor={true} trigger={codeActive} /></span>
+                  <span className="text-[#98c379]"><Typewriter text={t.ide_val_name} delay={2000} showCursor={true} trigger={codeActive} /></span>
                   <span className="text-[#98c379]">"</span>
                 </div>
 
                 <div className="ml-12">
                   <span className="text-[#e06c75]">{t.ide_prop_role}</span><span className="text-[#56b6c2]">=</span>
                   <span className="text-[#98c379]">"</span>
-                  <span className="text-[#98c379]"><Typewriter text={t.ide_val_role} delay={5200} showCursor={true} trigger={codeActive} /></span>
+                  <span className="text-[#98c379]"><Typewriter text={t.ide_val_role} delay={3200} showCursor={true} trigger={codeActive} /></span>
                   <span className="text-[#98c379]">"</span>
                 </div>
 
                 <div className="ml-12">
                   <span className="text-[#e06c75]">{t.ide_prop_passion}</span><span className="text-[#56b6c2]">=</span>
                   <span className="text-[#98c379]">"</span>
-                  <span className="text-[#98c379]"><Typewriter text={t.ide_val_passion} delay={7000} showCursor={true} trigger={codeActive} /></span>
+                  <span className="text-[#98c379]"><Typewriter text={t.ide_val_passion} delay={4400} showCursor={true} trigger={codeActive} /></span>
                   <span className="text-[#98c379]">"</span>
                 </div>
 
