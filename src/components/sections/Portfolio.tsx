@@ -53,7 +53,7 @@ export const Portfolio = ({ t }: { t: T }) => {
   return (
     <section
       id="trabajos"
-      className="relative py-20 sm:py-28 px-5 sm:px-8 overflow-hidden"
+      className="relative py-14 sm:py-20 px-5 sm:px-8 overflow-hidden"
       style={{ background: 'var(--bg-0)' }}
       onClick={() => isMobile && setHovered(null)}
     >
@@ -119,7 +119,7 @@ export const Portfolio = ({ t }: { t: T }) => {
               initial={{ opacity: 0, y: 36 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -36 }}
               transition={{ duration: 0.2 }}
               className="font-black tracking-tighter leading-[0.88] select-none break-words uppercase"
-              style={{ fontSize: 'clamp(2.8rem, 10vw, 11rem)', color: hovered !== null ? '#f97316' : fg(0.04) }}
+              style={{ fontSize: 'clamp(2rem, 7vw, 8rem)', color: hovered !== null ? '#f97316' : fg(0.04) }}
             >
               {hovered !== null ? projects[hovered].name : t.port_label}
             </motion.p>

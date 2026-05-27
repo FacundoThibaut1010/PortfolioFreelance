@@ -81,7 +81,7 @@ export const Hero = ({ t, scrollTo }: { t: T; scrollTo: (id: string) => void }) 
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto w-full relative z-10 flex flex-col items-center text-center pt-20 pb-16">
+      <div className="max-w-5xl mx-auto w-full relative z-10 flex flex-col items-center text-center pt-20 pb-12">
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
@@ -103,7 +103,7 @@ export const Hero = ({ t, scrollTo }: { t: T; scrollTo: (id: string) => void }) 
           <h1
             className="font-black uppercase leading-none select-none"
             style={{
-              fontSize: 'clamp(72px, 17.5vw, 210px)',
+              fontSize: 'clamp(52px, 11vw, 148px)',
               background: 'linear-gradient(90deg, #f97316 0%, #f43f5e 38%, #fbbf24 68%, #f97316 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -117,7 +117,7 @@ export const Hero = ({ t, scrollTo }: { t: T; scrollTo: (id: string) => void }) 
           <p
             className="leading-none select-none"
             style={{
-              fontSize: 'clamp(52px, 13vw, 160px)',
+              fontSize: 'clamp(38px, 8.2vw, 112px)',
               fontFamily: "'Playfair Display', Georgia, serif",
               fontStyle: 'italic',
               fontWeight: 400,

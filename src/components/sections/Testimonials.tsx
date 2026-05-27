@@ -29,12 +29,12 @@ export const Testimonials = ({ t }: { t: T }) => {
   };
 
   return (
-    <section id="resenas" className="pt-20 sm:pt-28 pb-10 sm:pb-14 px-5 sm:px-8" style={{ background: 'var(--bg-2)' }}>
+    <section id="resenas" className="pt-14 sm:pt-20 pb-8 sm:pb-10 px-5 sm:px-8" style={{ background: 'var(--bg-2)' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
           <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: fg(0.3) }}>{t.test_label}</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>{t.test_heading}</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>{t.test_heading}</h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: fg(0.4) }}>{t.test_sub}</p>
         </motion.div>
 

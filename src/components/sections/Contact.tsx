@@ -18,7 +18,7 @@ export const Contact = ({ t }: { t: T }) => {
   const fg = (op: number) => `rgba(var(--rgb-fg), ${op})`;
 
   return (
-    <section id="contacto" className="relative py-20 sm:py-28 px-5 sm:px-8 overflow-hidden" style={{ background: 'var(--bg-0)' }}>
+    <section id="contacto" className="relative py-14 sm:py-20 px-5 sm:px-8 overflow-hidden" style={{ background: 'var(--bg-0)' }}>
 
       {/* Same bg as Hero/Services */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -69,7 +69,7 @@ export const Contact = ({ t }: { t: T }) => {
               {t.contact_badge}
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5"
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight mb-5"
               style={{ color: fg(0.92) }}>
               {t.contact_h1}<br />{t.contact_h2}
             </h2>

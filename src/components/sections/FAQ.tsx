@@ -18,7 +18,7 @@ export const FAQ = ({ t }: { t: T }) => {
   const faqs = t.faq_items as { q: string; a: string; accent: string }[];
 
   return (
-    <section id="faq" className="pt-8 sm:pt-10 pb-20 sm:pb-28 px-5 sm:px-8 relative" style={{ background: 'var(--bg-2)' }}>
+    <section id="faq" className="pt-6 sm:pt-8 pb-14 sm:pb-20 px-5 sm:px-8 relative" style={{ background: 'var(--bg-2)' }}>
       <div className="max-w-6xl mx-auto">
         <div className="h-px mb-12 sm:mb-16"
           style={{ background: `linear-gradient(90deg, transparent, ${fg(0.07)}, transparent)` }} />
@@ -26,7 +26,7 @@ export const FAQ = ({ t }: { t: T }) => {
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
           className="text-center mb-14">
           <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: fg(0.3) }}>{t.faq_label}</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>{t.faq_heading}</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>{t.faq_heading}</h2>
           <p style={{ color: fg(0.4) }}>{t.faq_sub}</p>
         </motion.div>
 

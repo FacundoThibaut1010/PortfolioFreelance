@@ -13,7 +13,7 @@ export const Services = ({ t, scrollTo }: { t: T; scrollTo: (id: string) => void
   const fg = (op: number) => `rgba(var(--rgb-fg), ${op})`;
 
   return (
-    <section id="servicios" className="relative py-20 sm:py-28 px-5 sm:px-8 overflow-hidden" style={{ background: 'var(--bg-0)' }}>
+    <section id="servicios" className="relative py-14 sm:py-20 px-5 sm:px-8 overflow-hidden" style={{ background: 'var(--bg-0)' }}>
 
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -44,7 +44,7 @@ export const Services = ({ t, scrollTo }: { t: T; scrollTo: (id: string) => void
           <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: fg(0.3) }}>
             {t.svc_label}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>
             {t.svc_heading}
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: fg(0.4) }}>{t.svc_sub}</p>

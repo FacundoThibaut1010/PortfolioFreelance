@@ -11,7 +11,7 @@ export const About = ({ t }: { t: T }) => {
   return (
     <section
       id="sobre-mi"
-      className="py-20 sm:py-28 px-5 sm:px-8 relative overflow-hidden"
+      className="py-14 sm:py-20 px-5 sm:px-8 relative overflow-hidden"
       style={{ background: 'var(--bg-3)' }}
     >
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.05] blur-3xl"
@@ -22,7 +22,7 @@ export const About = ({ t }: { t: T }) => {
       <div className="max-w-6xl mx-auto relative z-10">
 
         {/* ── Bio ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 sm:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-14 sm:mb-18">
 
           {/* Left: photo → badge below */}
           <motion.div
@@ -46,7 +46,7 @@ export const About = ({ t }: { t: T }) => {
               />
               <div className="absolute -inset-5 rounded-full border opacity-15 pointer-events-none"
                 style={{ borderColor: '#f97316', borderStyle: 'dashed' }} />
-              <div className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden shadow-2xl"
+              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full overflow-hidden shadow-2xl"
                 style={{ border: '3px solid rgba(249,115,22,0.42)' }}>
                 <img src="/projets/fotoFacu.jpeg" alt="Facundo Thibaut"
                   className="w-full h-full object-cover object-top" />
@@ -74,7 +74,7 @@ export const About = ({ t }: { t: T }) => {
               {t.about_label}
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 mb-6 tracking-tight leading-tight"
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-3 mb-6 tracking-tight leading-tight"
               style={{ color: fg(0.92) }}>
               {t.about_h1}<br />
               <span style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
@@ -111,7 +111,7 @@ export const About = ({ t }: { t: T }) => {
           <span className="font-semibold text-sm tracking-widest uppercase" style={{ color: fg(0.3) }}>
             {t.proc_label}
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mt-3 mb-4 tracking-tight" style={{ color: fg(0.92) }}>
             {t.proc_heading}
           </h2>
           <p className="text-base max-w-lg mx-auto" style={{ color: fg(0.4) }}>{t.proc_sub}</p>
