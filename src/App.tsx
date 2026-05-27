@@ -45,9 +45,9 @@ export default function App() {
       <About />
       <Services scrollTo={scrollTo} />
       <Portfolio />
+      <Contact />
       <Testimonials />
       <FAQ />
-      <Contact />
       <Footer />
     </div>
   );

@@ -183,22 +183,6 @@ export const About = () => {
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-10 text-center"
-        >
-          <div
-            className="inline-flex items-center gap-3 rounded-2xl px-5 py-3.5 text-sm border"
-            style={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.55)' }}
-          >
-            <span className="text-lg">⚡</span>
-            De la charla al sitio online en{' '}
-            <strong className="text-white">1 a 2 semanas</strong>.
-          </div>
-        </motion.div>
 
       </div>
     </section>
