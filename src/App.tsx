@@ -1,5 +1,6 @@
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
+import { About } from './components/sections/About';
 import { Services } from './components/sections/Services';
 import { Process } from './components/sections/Process';
 import { Portfolio } from './components/sections/Portfolio';
@@ -17,6 +18,7 @@ export default function App() {
     <div className="font-sans overflow-x-hidden" style={{ background: '#0a0b14' }}>
       <Navbar scrollTo={scrollTo} />
       <Hero scrollTo={scrollTo} />
+      <About />
       <Services scrollTo={scrollTo} />
       <Process />
       <Portfolio />
