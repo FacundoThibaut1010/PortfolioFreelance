@@ -211,7 +211,7 @@ export const Navbar = ({ scrollTo, activeSection }: NavbarProps) => {
                   thibautfacundo7@gmail.com
                 </a>
                 <a
-                  href="https://instagram.com/facundo.thibaut"
+                  href="https://www.instagram.com/facuthibaut.dev/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-white/40 hover:text-white/65 text-sm transition-colors py-2"

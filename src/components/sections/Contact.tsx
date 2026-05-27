@@ -86,14 +86,14 @@ export const Contact = () => {
                 thibautfacundo7@gmail.com
               </motion.a>
               <motion.a
-                href="https://instagram.com/facundo.thibaut"
+                href="https://www.instagram.com/facuthibaut.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-white/60 transition-colors"
                 whileHover={{ scale: 1.03 }}
               >
                 <InstagramIcon />
-                @facundo.thibaut
+                @facuthibaut.dev
               </motion.a>
               <div className="flex items-center gap-2">
                 <MapPin size={15} />

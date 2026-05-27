@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
 import { About } from './components/sections/About';
@@ -19,23 +19,20 @@ export default function App() {
   };
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    SECTION_IDS.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-
-    return () => observers.forEach(o => o.disconnect());
+    const handleScroll = () => {
+      const vh = window.innerHeight;
+      let current = SECTION_IDS[0];
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= vh * 0.45) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (

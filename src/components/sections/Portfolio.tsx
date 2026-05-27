@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, ShoppingCart, Heart, X } from 'lucide-react';
+
+const GRID_BG = 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)';
 
 const PROJECTS = [
   {
@@ -31,11 +33,6 @@ export const Portfolio = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [winW, setWinW]         = useState(375);
 
-  // Touch handling (mobile expand vs open)
-  const touchTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const longPressed   = useRef(false);
-  const touchHandled  = useRef(false);
-
   useEffect(() => {
     const check = () => { setIsMobile(window.innerWidth < 768); setWinW(window.innerWidth); };
     check();
@@ -45,108 +42,103 @@ export const Portfolio = () => {
 
   const proj = selected !== null ? PROJECTS[selected] : null;
 
-  // Responsive accordion widths (2 items)
-  const pad  = 40;
-  const gap  = 16;
-  const area = winW - pad - gap;
+  // Responsive accordion widths (2 items, 16px gap, 40px padding)
+  const area = winW - 40 - 16;
   const expW = Math.max(180, Math.floor(area * 0.68));
   const colW = area - expW;
+
+  // Mobile: first tap expands, second tap on same card opens modal
+  const handleMobileTap = (i: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (hovered === i) {
+      setSelected(i); // already expanded → open modal
+    } else {
+      setHovered(i);  // expand first
+    }
+  };
+
+  const proj_modal = selected !== null ? PROJECTS[selected] : null;
 
   return (
     <section
       id="trabajos"
-      className="py-20 sm:py-28 px-5 sm:px-8 overflow-hidden"
-      style={{ background: '#161728' }}
+      className="relative py-20 sm:py-28 px-5 sm:px-8 overflow-hidden"
+      style={{ background: '#07080f' }}
+      // Tap outside card on mobile collapses the expanded one
+      onClick={() => isMobile && setHovered(null)}
     >
-      <div className="max-w-6xl mx-auto">
-
-        {/* Header */}
+      {/* Background: same as Hero */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <span className="text-white/30 font-semibold text-sm tracking-widest uppercase">Trabajos</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-3 mb-4 tracking-tight">
-            Proyectos reales
-          </h2>
-          <p className="text-white/40 text-base">
-            {isMobile ? 'Tocá una imagen para ver más.' : 'Pasá el cursor encima y hacé click para ver más.'}
-          </p>
-        </motion.div>
+          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%)' }}
+          animate={{ scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.1), transparent 70%)' }}
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
+        />
+        <div className="absolute inset-0 opacity-[0.018]"
+          style={{ backgroundImage: GRID_BG, backgroundSize: '60px 60px' }} />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
 
         {/* ── Accordion thumbnails ── */}
         <div className="flex items-end justify-center gap-4">
           {PROJECTS.map((p, i) => {
             const isHov = hovered === i;
-            const desktopW = isHov ? 400 : 150;
-            const desktopH = isHov ? 290 : 150;
-            const mobileW  = isHov ? expW : colW;
-            const mobileH  = isHov ? Math.floor(expW * 0.68) : Math.floor(colW * 0.68 + 50);
+
+            // Desktop sizes
+            const dW = isHov ? 400 : 150;
+            const dH = isHov ? 290 : 150;
+            // Mobile sizes
+            const mW = isHov ? expW : colW;
+            const mH = isHov ? Math.floor(expW * 0.68) : Math.max(100, Math.floor(colW * 0.85));
 
             return (
               <motion.button
                 key={p.name}
                 animate={{
-                  width:  isMobile ? mobileW  : desktopW,
-                  height: isMobile ? mobileH  : desktopH,
+                  width:  isMobile ? mW : dW,
+                  height: isMobile ? mH : dH,
                 }}
                 transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+                // Desktop
                 onMouseEnter={() => !isMobile && setHovered(i)}
                 onMouseLeave={() => !isMobile && setHovered(null)}
-                onTouchStart={() => {
-                  longPressed.current = false;
-                  if (touchTimer.current) clearTimeout(touchTimer.current);
-                  touchTimer.current = setTimeout(() => {
-                    longPressed.current = true;
-                    setHovered(v => v === i ? null : i);
-                  }, 420);
-                }}
-                onTouchMove={() => {
-                  if (touchTimer.current) { clearTimeout(touchTimer.current); touchTimer.current = null; }
-                }}
-                onTouchEnd={() => {
-                  if (touchTimer.current) { clearTimeout(touchTimer.current); touchTimer.current = null; }
-                  touchHandled.current = true;
-                  if (!longPressed.current) setSelected(i);
-                  longPressed.current = false;
-                  setTimeout(() => { touchHandled.current = false; }, 600);
-                }}
-                onClick={() => { if (!touchHandled.current) setSelected(i); }}
+                onClick={isMobile
+                  ? (e) => handleMobileTap(i, e)
+                  : () => setSelected(i)
+                }
                 className="relative overflow-hidden rounded-2xl shrink-0 cursor-pointer"
-                style={{ boxShadow: isHov ? `0 0 0 2px ${p.accent}80` : '0 0 0 1px rgba(255,255,255,0.06)' }}
+                style={{
+                  boxShadow: isHov ? `0 0 0 2px ${p.accent}80, 0 20px 60px ${p.accent}25` : '0 0 0 1px rgba(255,255,255,0.07)',
+                }}
               >
                 <img
                   src={p.image}
                   alt={p.name}
                   draggable={false}
-                  className="w-full h-full object-cover pointer-events-none select-none"
-                  style={{ transition: 'filter 0.3s', filter: isHov ? 'brightness(1)' : 'brightness(0.6)' }}
+                  className="w-full h-full object-cover pointer-events-none select-none transition-all duration-500"
+                  style={{ filter: isHov ? 'brightness(1)' : 'brightness(0.5)' }}
                 />
-                {/* Gradient overlay on hover */}
+
+                {/* Gradient + badge on hover */}
                 <AnimatePresence>
                   {isHov && (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="absolute inset-0"
-                      style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)' }}
-                    />
-                  )}
-                </AnimatePresence>
-                {/* Type badge on hover */}
-                <AnimatePresence>
-                  {isHov && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute bottom-3 left-3"
+                      className="absolute inset-0 flex flex-col justify-end p-4"
+                      style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }}
                     >
                       <span
-                        className="text-[10px] font-bold px-2.5 py-1 rounded-full border flex items-center gap-1"
+                        className="text-[10px] font-bold px-2.5 py-1 rounded-full border w-fit flex items-center gap-1"
                         style={{ background: `${p.accent}22`, borderColor: `${p.accent}50`, color: p.accent }}
                       >
                         {p.type}
@@ -160,10 +152,13 @@ export const Portfolio = () => {
         </div>
 
         {/* ── Giant label ── */}
-        <div className="w-full text-center overflow-hidden pointer-events-none" style={{ marginTop: '0.25em' }}>
+        <div
+          className="w-full text-center overflow-hidden pointer-events-none"
+          style={{ marginTop: isMobile ? '0.35em' : '0.2em' }}
+        >
           <AnimatePresence mode="wait">
             <motion.p
-              key={hovered ?? 'default'}
+              key={hovered ?? 'idle'}
               initial={{ opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -36 }}
@@ -179,11 +174,22 @@ export const Portfolio = () => {
           </AnimatePresence>
         </div>
 
+        {/* Mobile hint */}
+        {isMobile && hovered === null && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center text-white/20 text-xs mt-4 tracking-wide"
+          >
+            Tocá una imagen para ver · Tocá de nuevo para abrir
+          </motion.p>
+        )}
+
       </div>
 
       {/* ── Modal ── */}
       <AnimatePresence>
-        {proj && (
+        {proj_modal && (
           <>
             <motion.div
               key="backdrop"
@@ -194,18 +200,21 @@ export const Portfolio = () => {
               exit={{ opacity: 0 }}
               onClick={() => setSelected(null)}
             />
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" onClick={() => setSelected(null)}>
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+              onClick={() => setSelected(null)}
+            >
               <motion.div
                 key="modal"
                 className="relative w-full max-w-lg rounded-2xl overflow-hidden border"
-                style={{ background: '#111220', borderColor: `${proj.accent}40` }}
+                style={{ background: '#111220', borderColor: `${proj_modal.accent}40` }}
                 initial={{ scale: 0.88, opacity: 0, y: 28 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.88, opacity: 0, y: 20 }}
                 transition={{ type: 'spring', stiffness: 320, damping: 26 }}
                 onClick={e => e.stopPropagation()}
               >
-                <div className="h-[2px]" style={{ background: proj.accent }} />
+                <div className="h-[2px]" style={{ background: proj_modal.accent }} />
 
                 <button
                   onClick={() => setSelected(null)}
@@ -216,36 +225,36 @@ export const Portfolio = () => {
                 </button>
 
                 <div className="h-52 sm:h-60 overflow-hidden">
-                  <img src={proj.image} alt={proj.name} className="w-full h-full object-cover" />
+                  <img src={proj_modal.image} alt={proj_modal.name} className="w-full h-full object-cover" />
                 </div>
 
                 <div className="p-6">
                   <span
                     className="inline-block text-[10px] font-bold px-2.5 py-1 rounded-full border mb-3"
-                    style={{ background: `${proj.accent}15`, borderColor: `${proj.accent}35`, color: proj.accent }}
+                    style={{ background: `${proj_modal.accent}15`, borderColor: `${proj_modal.accent}35`, color: proj_modal.accent }}
                   >
-                    {proj.type}
+                    {proj_modal.type}
                   </span>
 
-                  <h3 className="text-xl font-bold text-white mb-2">{proj.name}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed mb-5">{proj.desc}</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{proj_modal.name}</h3>
+                  <p className="text-white/45 text-sm leading-relaxed mb-5">{proj_modal.desc}</p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {proj.tags.map(tag => (
+                    {proj_modal.tags.map(tag => (
                       <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full border"
-                        style={{ background: `${proj.accent}10`, borderColor: `${proj.accent}25`, color: proj.accent }}>
+                        style={{ background: `${proj_modal.accent}10`, borderColor: `${proj_modal.accent}25`, color: proj_modal.accent }}>
                         {tag}
                       </span>
                     ))}
                   </div>
 
                   <motion.a
-                    href={proj.url}
+                    href={proj_modal.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 text-white font-bold text-sm py-3.5 px-6 rounded-xl w-full"
-                    style={{ background: `linear-gradient(135deg, ${proj.accent}, ${proj.accent}cc)`, boxShadow: `0 0 24px ${proj.accent}40` }}
-                    whileHover={{ scale: 1.03, boxShadow: `0 8px 30px ${proj.accent}55` }}
+                    style={{ background: `linear-gradient(135deg, ${proj_modal.accent}, ${proj_modal.accent}cc)`, boxShadow: `0 0 24px ${proj_modal.accent}40` }}
+                    whileHover={{ scale: 1.03, boxShadow: `0 8px 30px ${proj_modal.accent}55` }}
                     whileTap={{ scale: 0.97 }}
                   >
                     Ver sitio en vivo <ExternalLink size={14} />
