@@ -14,7 +14,6 @@ export const TRANS = {
     hero_roles: [
       'Desarrollador Web Freelance',
       'Creador de Landing Pages',
-      'Especialista en React & TypeScript',
       'Diseñador de Sitios Únicos',
     ],
     hero_desc: 'Creo sitios web que captan clientes y hacen crecer tu negocio. Diseño, desarrollo y lanzamiento en tiempo récord.',
@@ -113,7 +112,6 @@ export const TRANS = {
     hero_roles: [
       'Freelance Web Developer',
       'Landing Page Creator',
-      'React & TypeScript Expert',
       'Custom Website Designer',
     ],
     hero_desc: 'I build websites that attract clients and grow your business. Design, development and launch in record time.',

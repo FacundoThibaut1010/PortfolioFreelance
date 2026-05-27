@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, ShoppingCart, Heart, X } from 'lucide-react';
 import type { T } from '../../i18n';
@@ -41,6 +41,14 @@ export const Portfolio = ({ t }: { t: T }) => {
   }));
 
   const proj = selected !== null ? projects[selected] : null;
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = selected !== null ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selected]);
+
+  const closeModal = useCallback(() => setSelected(null), []);
 
   return (
     <section
@@ -133,9 +141,9 @@ export const Portfolio = ({ t }: { t: T }) => {
             <motion.div key="bd" className="fixed inset-0 z-50 bg-black/75"
               style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setSelected(null)} />
+              onClick={closeModal} />
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-              onClick={() => setSelected(null)}>
+              onClick={closeModal}>
               <motion.div key="modal" className="relative w-full max-w-lg rounded-2xl overflow-hidden border"
                 style={{ background: 'var(--bg-3)', borderColor: `${proj.accent}40` }}
                 initial={{ scale: 0.88, opacity: 0, y: 28 }} animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -143,7 +151,7 @@ export const Portfolio = ({ t }: { t: T }) => {
                 transition={{ type: 'spring', stiffness: 320, damping: 26 }}
                 onClick={e => e.stopPropagation()}>
                 <div className="h-[2px]" style={{ background: proj.accent }} />
-                <button onClick={() => setSelected(null)}
+                <button onClick={closeModal}
                   className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center"
                   style={{ background: 'rgba(0,0,0,0.55)', color: 'rgba(255,255,255,0.7)' }}>
                   <X size={15} />

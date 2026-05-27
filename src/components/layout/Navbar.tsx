@@ -38,9 +38,18 @@ export const Navbar = ({ t, lang, setLang, theme, setTheme, scrollTo, activeSect
     { id: 'sobre-mi',  label: t.nav_sobre },
     { id: 'servicios', label: t.nav_servicios },
     { id: 'trabajos',  label: t.nav_trabajos },
-    { id: 'faq',       label: 'FAQ' },
     { id: 'contacto',  label: t.nav_contacto },
   ];
+
+  const SECTION_LABEL: Record<string, string> = {
+    'hero':      t.nav_inicio,
+    'sobre-mi':  t.nav_sobre,
+    'servicios': t.nav_servicios,
+    'trabajos':  t.nav_trabajos,
+    'contacto':  t.nav_contacto,
+    'resenas':   lang === 'es' ? 'Reseñas' : 'Reviews',
+    'faq':       'FAQ',
+  };
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
@@ -152,14 +161,51 @@ export const Navbar = ({ t, lang, setLang, theme, setTheme, scrollTo, activeSect
             </a>
           </div>
 
-          {/* Burger */}
-          <button
-            onClick={() => setOpen(v => !v)}
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl transition-colors border"
-            style={{ color: fg(0.7), borderColor: fg(0.1), background: 'transparent' }}
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {/* Mobile right: section indicator + lang + theme + burger */}
+          <div className="md:hidden flex items-center gap-1.5">
+            {/* Active section pill */}
+            <span
+              className="text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wide uppercase"
+              style={{ background: 'rgba(249,115,22,0.12)', color: '#f97316', border: '1px solid rgba(249,115,22,0.25)' }}
+            >
+              {SECTION_LABEL[activeSection] ?? t.nav_inicio}
+            </span>
+
+            {/* Lang pill */}
+            <div className="flex rounded-full overflow-hidden border" style={{ borderColor: fg(0.1) }}>
+              {(['es', 'en'] as const).map(l => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider transition-colors"
+                  style={{
+                    background: lang === l ? 'rgba(249,115,22,0.15)' : 'transparent',
+                    color: lang === l ? '#f97316' : fg(0.35),
+                  }}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-8 h-8 flex items-center justify-center rounded-full border transition-colors"
+              style={{ borderColor: fg(0.12), color: fg(0.5) }}
+            >
+              {theme === 'dark' ? <Sun size={13} /> : <Moon size={13} />}
+            </button>
+
+            {/* Burger */}
+            <button
+              onClick={() => setOpen(v => !v)}
+              className="w-9 h-9 flex items-center justify-center rounded-xl transition-colors border"
+              style={{ color: fg(0.7), borderColor: fg(0.1), background: 'transparent' }}
+            >
+              {open ? <X size={19} /> : <Menu size={19} />}
+            </button>
+          </div>
         </div>
       </header>
 
