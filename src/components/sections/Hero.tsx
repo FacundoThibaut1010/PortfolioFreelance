@@ -1,32 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap, Palette, Target, Code2 } from 'lucide-react';
-
-const CARDS = [
-  {
-    icon: Palette,
-    title: 'Diseño a medida',
-    desc: 'Sin templates. Tu sitio, hecho desde cero con tu identidad.',
-    accent: '#f43f5e',
-    glow: 'rgba(244,63,94,0.12)',
-    border: 'rgba(244,63,94,0.22)',
-  },
-  {
-    icon: Zap,
-    title: 'Entrega rápida',
-    desc: 'De la idea al sitio online en 1 a 2 semanas.',
-    accent: '#f59e0b',
-    glow: 'rgba(245,158,11,0.12)',
-    border: 'rgba(245,158,11,0.22)',
-  },
-  {
-    icon: Target,
-    title: 'Orientado a vender',
-    desc: 'Cada detalle pensado para convertir visitas en clientes.',
-    accent: '#10b981',
-    glow: 'rgba(16,185,129,0.12)',
-    border: 'rgba(16,185,129,0.22)',
-  },
-];
+import { ArrowRight, Code2 } from 'lucide-react';
 
 const TECH = ['React', 'TypeScript', 'Vite', 'Tailwind CSS'];
 
@@ -52,7 +25,7 @@ export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
         <motion.div
-          className="absolute bottom-20 right-1/3 w-72 h-72 rounded-full opacity-10 blur-3xl"
+          className="absolute bottom-20 left-1/3 w-72 h-72 rounded-full opacity-10 blur-3xl"
           style={{ background: 'radial-gradient(circle, #f59e0b, transparent 70%)' }}
           animate={{ scale: [1, 1.1, 1], x: [0, 15, 0], y: [0, 10, 0] }}
           transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
@@ -62,173 +35,143 @@ export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
           style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
       </div>
 
-      <div className="max-w-5xl mx-auto w-full relative z-10 flex flex-col gap-14">
+      {/* ── Centered content ── */}
+      <div className="max-w-3xl mx-auto w-full relative z-10 flex flex-col items-center text-center gap-6">
 
-        {/* ── Profile ── */}
+        {/* Photo — floating */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-14"
+          className="relative"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
+          transition={{
+            opacity: { duration: 0.6 },
+            scale: { duration: 0.6 },
+            y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 },
+          }}
         >
-          {/* Photo — floating */}
+          {/* Glow behind photo */}
           <motion.div
-            className="relative shrink-0"
-            animate={{ y: [0, -14, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute inset-0 rounded-full blur-2xl scale-125"
+            style={{ background: 'linear-gradient(135deg, #f97316, #f43f5e)', opacity: 0.55 }}
+            animate={{ opacity: [0.55, 0.82, 0.55] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <div
+            className="relative w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden shadow-2xl"
+            style={{ border: '3px solid rgba(249,115,22,0.45)' }}
           >
-            {/* Glow behind photo — orange/rose */}
-            <motion.div
-              className="absolute inset-0 rounded-full blur-2xl scale-125"
-              style={{ background: 'linear-gradient(135deg, #f97316, #f43f5e)', opacity: 0.55 }}
-              animate={{ opacity: [0.55, 0.8, 0.55] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+            <img
+              src="/projets/fotoFacu.jpeg"
+              alt="Facundo Thibaut"
+              className="w-full h-full object-cover object-top"
             />
-            <div
-              className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl"
-              style={{ border: '3px solid rgba(249,115,22,0.45)' }}
-            >
-              <img
-                src="/projets/fotoFacu.jpeg"
-                alt="Facundo Thibaut"
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-            {/* Online dot */}
-            <div
-              className="absolute bottom-3 right-3 w-5 h-5 rounded-full border-2 flex items-center justify-center"
-              style={{ background: '#10b981', borderColor: '#0a0b14' }}
-            >
-              <motion.div
-                className="w-3 h-3 rounded-full"
-                style={{ background: '#10b981' }}
-                animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </div>
-          </motion.div>
-
-          {/* Text */}
-          <div className="text-center sm:text-left flex flex-col justify-center">
-            {/* Available badge */}
+          </div>
+          {/* Online dot */}
+          <div
+            className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 flex items-center justify-center"
+            style={{ background: '#10b981', borderColor: '#0a0b14' }}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 self-center sm:self-start tracking-widest border"
-              style={{ background: 'rgba(16,185,129,0.1)', borderColor: 'rgba(16,185,129,0.25)', color: '#10b981' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10b981' }} />
-              Disponible para proyectos
-            </motion.div>
-
-            {/* Name — orange/rose gradient */}
-            <motion.h1
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-none mb-3"
-            >
-              Facundo<br />
-              <span style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Thibaut
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
-              className="text-lg font-semibold mb-4 tracking-wide"
-              style={{ color: '#f97316' }}
-            >
-              Desarrollador Web Freelance
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.55 }}
-              className="text-white/40 text-base sm:text-lg max-w-md leading-relaxed"
-            >
-              Creo sitios web que captan clientes y hacen crecer tu negocio.
-              Diseño, desarrollo y lanzamiento en tiempo récord.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.65 }}
-              className="flex flex-col sm:flex-row items-center sm:items-start gap-3 mt-7"
-            >
-              <motion.a
-                href="https://wa.me/541171247355"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-white font-semibold text-sm px-6 py-3.5 rounded-2xl w-full sm:w-auto justify-center"
-                style={{ background: 'linear-gradient(135deg, #f97316, #f43f5e)', boxShadow: '0 0 30px rgba(249,115,22,0.35)' }}
-                whileHover={{ scale: 1.04, boxShadow: '0 0 50px rgba(249,115,22,0.55)' }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Hablemos
-              </motion.a>
-              <motion.button
-                onClick={() => scrollTo('servicios')}
-                className="flex items-center gap-2 text-white/50 hover:text-white font-medium text-sm px-5 py-3.5 rounded-2xl border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all w-full sm:w-auto justify-center"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Ver servicios <ArrowRight size={15} />
-              </motion.button>
-            </motion.div>
-
-            {/* Tech stack — código real */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="mt-5 flex flex-col items-center sm:items-start gap-2"
-            >
-              <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-                <Code2 size={13} className="text-white/25 shrink-0" />
-                <span className="text-white/25 text-xs font-mono">Código real, sin page builders:</span>
-                {TECH.map(t => (
-                  <span key={t} className="text-[11px] font-mono px-2 py-0.5 rounded border"
-                    style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full"
+              style={{ background: '#10b981' }}
+              animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </div>
         </motion.div>
 
-        {/* ── 3 cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {CARDS.map((card, i) => {
-            const Icon = card.icon;
-            return (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.5 + i * 0.12 }}
-                whileHover={{ y: -6, scale: 1.03, borderColor: card.accent }}
-                className="rounded-2xl p-5 border cursor-default"
-                style={{ background: card.glow, borderColor: card.border }}
-              >
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: `${card.accent}20`, color: card.accent }}>
-                  <Icon size={18} />
-                </div>
-                <h3 className="text-white font-semibold text-base mb-1.5">{card.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed">{card.desc}</p>
-              </motion.div>
-            );
-          })}
-        </div>
+        {/* Available badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full tracking-widest border"
+          style={{ background: 'rgba(16,185,129,0.1)', borderColor: 'rgba(16,185,129,0.25)', color: '#10b981' }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10b981' }} />
+          Disponible para proyectos
+        </motion.div>
+
+        {/* Name — big and centered */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-none"
+        >
+          Facundo<br />
+          <span style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            Thibaut
+          </span>
+        </motion.h1>
+
+        {/* Role */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55 }}
+          className="text-lg sm:text-xl font-semibold tracking-wide"
+          style={{ color: '#f97316' }}
+        >
+          Desarrollador Web Freelance
+        </motion.p>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.65 }}
+          className="text-white/40 text-base sm:text-lg max-w-lg leading-relaxed"
+        >
+          Creo sitios web que captan clientes y hacen crecer tu negocio.
+          Diseño, desarrollo y lanzamiento en tiempo récord.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.75 }}
+          className="flex flex-col sm:flex-row items-center gap-3"
+        >
+          <motion.a
+            href="https://wa.me/541171247355"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 text-white font-semibold text-sm px-7 py-3.5 rounded-2xl"
+            style={{ background: '#25D366', boxShadow: '0 0 28px rgba(37,211,102,0.35)' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 48px rgba(37,211,102,0.55)' }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Hablemos
+          </motion.a>
+          <motion.button
+            onClick={() => scrollTo('servicios')}
+            className="flex items-center gap-2 text-white/50 hover:text-white font-medium text-sm px-5 py-3.5 rounded-2xl border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Ver servicios <ArrowRight size={15} />
+          </motion.button>
+        </motion.div>
+
+        {/* Tech — código real */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+          className="flex items-center gap-2 flex-wrap justify-center"
+        >
+          <Code2 size={13} className="text-white/20 shrink-0" />
+          <span className="text-white/20 text-xs font-mono">Código real, sin page builders:</span>
+          {TECH.map(t => (
+            <span key={t} className="text-[11px] font-mono px-2 py-0.5 rounded border"
+              style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}>
+              {t}
+            </span>
+          ))}
+        </motion.div>
 
       </div>
     </section>

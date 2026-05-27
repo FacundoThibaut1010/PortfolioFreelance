@@ -3,28 +3,25 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, MapPin } from 'lucide-react';
 
 const WA_NUMBER = '541171247355';
-const LINE1 = "¿Listo para tener";
-const LINE2 = "tu web profesional?";
 
-// ── Skiper31-style character animation ──
+// ── Skiper31-style character — converges from edges as you scroll ──
 type CharProps = {
   char: string;
   index: number;
   center: number;
-  scrollYProgress: any;
+  progress: any;   // MotionValue<number>
   start: number;
   end: number;
 };
 
-const AnimChar = ({ char, index, center, scrollYProgress, start, end }: CharProps) => {
-  const isSpace = char === ' ';
+const AnimChar = ({ char, index, center, progress, start, end }: CharProps) => {
   const dist = index - center;
 
-  const x = useTransform(scrollYProgress, [start, end], [dist * 52, 0]);
-  const rotateX = useTransform(scrollYProgress, [start, end], [dist * 38, 0]);
-  const opacity = useTransform(scrollYProgress, [start, start + 0.18], [0.15, 1]);
+  const x        = useTransform(progress, [start, end], [dist * 40, 0]);
+  const rotateX  = useTransform(progress, [start, end], [dist * 28, 0]);
+  const opacity  = useTransform(progress, [start, Math.min(start + 0.22, end)], [0, 1]);
 
-  if (isSpace) return <span className="inline-block w-3 sm:w-4 lg:w-5" />;
+  if (char === ' ') return <span className="inline-block w-3 sm:w-4 lg:w-5" />;
 
   return (
     <motion.span className="inline-block" style={{ x, rotateX, opacity }}>
@@ -36,6 +33,9 @@ const AnimChar = ({ char, index, center, scrollYProgress, start, end }: CharProp
 export const Contact = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // scrollYProgress: 0 when top of section = top of viewport
+  //                  1 when bottom of section = bottom of viewport
+  // Section is 260vh → ~160vh of actual scrolling
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
@@ -43,69 +43,88 @@ export const Contact = () => {
 
   const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Facundo! Me interesa hacer una web. ¿Podemos hablar?')}`;
 
+  const LINE1 = '¿Listo para tener';
+  const LINE2 = 'tu web profesional?';
   const chars1 = LINE1.split('');
   const chars2 = LINE2.split('');
   const center1 = Math.floor(chars1.length / 2);
   const center2 = Math.floor(chars2.length / 2);
 
-  // Line 1: animates 0 → 0.45
-  // Line 2: animates 0.05 → 0.50  (slight delay)
-  // Buttons: fade in 0.52 → 0.72
-  const btnOpacity = useTransform(scrollYProgress, [0.52, 0.72], [0, 1]);
-  const btnY       = useTransform(scrollYProgress, [0.52, 0.72], [36, 0]);
-  const subtitleOp = useTransform(scrollYProgress, [0.46, 0.60], [0, 1]);
+  // Timeline inside the 260vh section
+  // Line 1 flies in: 0.00 → 0.38
+  // Line 2 flies in: 0.06 → 0.44  (slight lag)
+  // Subtitle appears:  0.44 → 0.58
+  // Buttons appear:    0.54 → 0.72
+  const subtitleOp = useTransform(scrollYProgress, [0.44, 0.58], [0, 1]);
+  const subtitleY  = useTransform(scrollYProgress, [0.44, 0.58], [20, 0]);
+  const btnOpacity = useTransform(scrollYProgress, [0.54, 0.72], [0, 1]);
+  const btnY       = useTransform(scrollYProgress, [0.54, 0.72], [28, 0]);
+  const locOp      = useTransform(scrollYProgress, [0.65, 0.78], [0, 1]);
 
   return (
     <section
       id="contacto"
       ref={containerRef}
-      style={{ height: '220vh', background: '#0a0b14', position: 'relative' }}
+      style={{ height: '260vh', background: '#0a0b14', position: 'relative' }}
     >
-      {/* Sticky viewport */}
+      {/* ── Sticky viewport ── */}
       <div
         style={{ position: 'sticky', top: 0, height: '100vh' }}
         className="flex flex-col items-center justify-center overflow-hidden px-5"
       >
         {/* Ambient glows */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full pointer-events-none blur-3xl opacity-15"
+          className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full pointer-events-none blur-3xl opacity-15"
           style={{ background: 'radial-gradient(circle, #f97316, transparent 70%)' }}
-          animate={{ scale: [1, 1.2, 1], x: [0, 20, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ scale: [1, 1.2, 1], x: [0, 25, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full pointer-events-none blur-3xl opacity-10"
           style={{ background: 'radial-gradient(circle, #f43f5e, transparent 70%)' }}
           animate={{ scale: [1, 1.15, 1], x: [0, -15, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
 
-        {/* Rainbow top stripe */}
+        {/* Top rainbow stripe */}
         <div className="absolute top-0 left-0 right-0 h-[2px]"
           style={{ background: 'linear-gradient(90deg, #f43f5e, #f97316, #f59e0b)' }} />
 
         {/* ── Animated title (Skiper31 style) ── */}
         <div
-          className="relative z-10 text-center font-extrabold text-white leading-[1.1] tracking-tight mb-3"
-          style={{ perspective: '700px', fontSize: 'clamp(32px, 6vw, 72px)' }}
+          className="relative z-10 font-extrabold text-white leading-[1.12] tracking-tight text-center"
+          style={{ perspective: '800px', fontSize: 'clamp(28px, 5.5vw, 68px)' }}
         >
-          {/* Line 1 */}
+          {/* Line 1 — white */}
           <div>
             {chars1.map((char, i) => (
               <AnimChar
-                key={i} char={char} index={i} center={center1}
-                scrollYProgress={scrollYProgress}
-                start={0} end={0.45}
+                key={i}
+                char={char}
+                index={i}
+                center={center1}
+                progress={scrollYProgress}
+                start={0.00}
+                end={0.38}
               />
             ))}
           </div>
-          {/* Line 2 — gradient text */}
-          <div style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+
+          {/* Line 2 — gradient */}
+          <div style={{
+            background: 'linear-gradient(90deg, #f97316, #f43f5e)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}>
             {chars2.map((char, i) => (
               <AnimChar
-                key={i} char={char} index={i} center={center2}
-                scrollYProgress={scrollYProgress}
-                start={0.05} end={0.50}
+                key={i}
+                char={char}
+                index={i}
+                center={center2}
+                progress={scrollYProgress}
+                start={0.06}
+                end={0.44}
               />
             ))}
           </div>
@@ -113,8 +132,8 @@ export const Contact = () => {
 
         {/* Subtitle */}
         <motion.p
-          style={{ opacity: subtitleOp }}
-          className="relative z-10 text-white/40 text-base sm:text-lg text-center max-w-md mb-10"
+          style={{ opacity: subtitleOp, y: subtitleY }}
+          className="relative z-10 text-white/40 text-base sm:text-lg text-center max-w-md mt-5 mb-10"
         >
           Escribime y charlamos sin compromiso. Respondo en menos de 24 horas.
         </motion.p>
@@ -122,16 +141,16 @@ export const Contact = () => {
         {/* ── Contact buttons ── */}
         <motion.div
           style={{ opacity: btnOpacity, y: btnY }}
-          className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full max-w-md"
+          className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full max-w-sm"
         >
           {/* WhatsApp — green */}
           <motion.a
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 text-white font-bold text-base py-4 px-7 rounded-2xl w-full sm:w-auto flex-1"
-            style={{ background: '#25D366', boxShadow: '0 0 32px rgba(37,211,102,0.35)' }}
-            whileHover={{ scale: 1.04, boxShadow: '0 0 50px rgba(37,211,102,0.55)' }}
+            className="flex items-center justify-center gap-3 text-white font-bold text-sm py-4 px-7 rounded-2xl w-full"
+            style={{ background: '#25D366', boxShadow: '0 0 28px rgba(37,211,102,0.35)' }}
+            whileHover={{ scale: 1.04, boxShadow: '0 0 48px rgba(37,211,102,0.55)' }}
             whileTap={{ scale: 0.97 }}
           >
             <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="currentColor">
@@ -140,10 +159,10 @@ export const Contact = () => {
             WhatsApp
           </motion.a>
 
-          {/* Mail — opens client */}
+          {/* Mail */}
           <motion.a
             href="mailto:thibautfacundo7@gmail.com"
-            className="flex items-center justify-center gap-3 text-white/70 font-bold text-base py-4 px-7 rounded-2xl w-full sm:w-auto flex-1 border border-white/10 hover:border-white/25 hover:text-white transition-colors"
+            className="flex items-center justify-center gap-3 text-white/65 font-bold text-sm py-4 px-7 rounded-2xl w-full border border-white/10 hover:border-white/25 hover:text-white transition-colors"
             style={{ background: 'rgba(255,255,255,0.05)' }}
             whileHover={{ scale: 1.04, background: 'rgba(255,255,255,0.09)' }}
             whileTap={{ scale: 0.97 }}
@@ -155,7 +174,7 @@ export const Contact = () => {
 
         {/* Location */}
         <motion.p
-          style={{ opacity: btnOpacity }}
+          style={{ opacity: locOp }}
           className="relative z-10 flex items-center gap-2 text-white/25 text-sm mt-7 font-mono"
         >
           <MapPin size={13} />
