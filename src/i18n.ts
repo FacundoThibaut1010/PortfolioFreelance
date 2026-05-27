@@ -93,7 +93,7 @@ export const TRANS = {
       { q: '¿Puedo pedir cambios una vez que esté lista?', a: 'Sí. Durante el proceso hacemos todas las revisiones necesarias. Una vez publicada, podés pedirme ajustes menores sin costo adicional dentro de los primeros 15 días.', accent: '#10b981' },
       { q: '¿Cómo se paga?', a: '50% para arrancar el proyecto y 50% al entregar. Acepto transferencia bancaria y Mercado Pago.', accent: '#f59e0b' },
       { q: '¿Qué necesito tener listo para empezar?', a: 'Con que me cuentes tu idea ya podemos arrancar. Si tenés logo, textos y fotos, mejor. Si no, te oriento para conseguirlos.', accent: '#06b6d4' },
-      { q: '¿Usás Wix, WordPress o constructores?', a: 'No. Todo el código es escrito a mano con React y TypeScript. Eso garantiza velocidad, flexibilidad total y un resultado único que ningún template puede dar.', accent: '#a855f7' },
+      { q: '¿Usás Wix, WordPress o constructores?', a: 'No. Todo el código es escrito a mano. Eso garantiza velocidad, flexibilidad total y un resultado único que ningún template puede dar.', accent: '#a855f7' },
     ],
 
     footer_sub: 'Desarrollo Web · Buenos Aires, Argentina',

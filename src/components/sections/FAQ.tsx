@@ -30,7 +30,55 @@ export const FAQ = ({ t }: { t: T }) => {
           <p style={{ color: fg(0.4) }}>{t.faq_sub}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 items-start">
+        {/* Two independent columns so expanding one side never shifts the other */}
+        <div className="hidden md:flex gap-6">
+          {[faqs.filter((_, i) => i % 2 === 0), faqs.filter((_, i) => i % 2 === 1)].map((col, colIdx) => (
+            <div key={colIdx} className="flex-1 flex flex-col gap-3">
+              {col.map((faq) => {
+                  const i = faqs.indexOf(faq);
+                const isOpen = openSet.has(i);
+                return (
+                  <motion.div key={i}
+                    initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                    className="rounded-2xl overflow-hidden border"
+                    style={{ background: 'var(--bg-3)', borderColor: isOpen ? `${faq.accent}45` : fg(0.06), transition: 'border-color 0.25s' }}>
+                    <button onClick={() => toggle(i)} className="w-full flex items-start gap-4 p-5 text-left">
+                      <span className="text-xs font-black font-mono mt-0.5 shrink-0 w-6 transition-colors duration-200"
+                        style={{ color: isOpen ? faq.accent : fg(0.18) }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="flex-1 font-semibold text-sm sm:text-base leading-snug transition-colors duration-200"
+                        style={{ color: isOpen ? fg(0.95) : fg(0.7) }}>
+                        {faq.q}
+                      </span>
+                      <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}
+                        className="shrink-0 mt-0.5 transition-colors duration-200"
+                        style={{ color: isOpen ? faq.accent : fg(0.25) }}>
+                        <ChevronDown size={16} />
+                      </motion.span>
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div key="answer"
+                          initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.26, ease: [0.4, 0, 0.2, 1] }} style={{ overflow: 'hidden' }}>
+                          <div className="flex gap-4 px-5 pb-5 pt-3" style={{ borderTop: `1px solid ${fg(0.05)}` }}>
+                            <div className="w-[2px] rounded-full self-stretch shrink-0" style={{ background: faq.accent }} />
+                            <p className="text-sm leading-relaxed" style={{ color: fg(0.45) }}>{faq.a}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: single column */}
+        <div className="flex md:hidden flex-col gap-3">
           {faqs.map((faq, i) => {
             const isOpen = openSet.has(i);
             return (
