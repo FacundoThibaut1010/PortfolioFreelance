@@ -3,127 +3,133 @@ import { ArrowRight, Code2 } from 'lucide-react';
 
 const TECH = ['React', 'TypeScript', 'Vite', 'Tailwind CSS'];
 
+// Small scattered decorative dots (like the reference image)
+const DOTS = [
+  { left: '8%',  top: '22%', color: '#f97316', size: 5 },
+  { left: '88%', top: '18%', color: '#f43f5e', size: 4 },
+  { left: '92%', top: '55%', color: '#f59e0b', size: 3 },
+  { left: '5%',  top: '68%', color: '#f43f5e', size: 4 },
+  { left: '78%', top: '78%', color: '#f97316', size: 3 },
+  { left: '55%', top: '12%', color: '#fbbf24', size: 4 },
+  { left: '18%', top: '82%', color: '#06b6d4', size: 3 },
+];
+
 export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-20 pb-16 px-5 sm:px-8 overflow-hidden"
-      style={{ background: '#0a0b14' }}
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-5 sm:px-8"
+      style={{ background: '#07080f' }}
     >
-      {/* Background glows */}
+      {/* ── Background ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Large glow orbs */}
         <motion.div
-          className="absolute top-20 right-10 w-96 h-96 rounded-full opacity-20 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #f97316, transparent 70%)' }}
-          animate={{ scale: [1, 1.15, 1], x: [0, 20, 0], y: [0, -15, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(249,115,22,0.18), transparent 70%)' }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute top-40 left-10 w-64 h-64 rounded-full opacity-12 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #f43f5e, transparent 70%)' }}
-          animate={{ scale: [1, 1.2, 1], x: [0, -10, 0], y: [0, 20, 0] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(244,63,94,0.12), transparent 70%)' }}
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
         />
-        <motion.div
-          className="absolute bottom-20 left-1/3 w-72 h-72 rounded-full opacity-10 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #f59e0b, transparent 70%)' }}
-          animate={{ scale: [1, 1.1, 1], x: [0, 15, 0], y: [0, 10, 0] }}
-          transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
-        />
+
         {/* Grid */}
-        <div className="absolute inset-0 opacity-[0.02]"
+        <div className="absolute inset-0 opacity-[0.018]"
           style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
+        {/* Scatter dots */}
+        {DOTS.map((dot, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{ left: dot.left, top: dot.top, width: dot.size, height: dot.size, background: dot.color }}
+            animate={{ opacity: [0.3, 0.9, 0.3], scale: [1, 1.6, 1] }}
+            transition={{ duration: 2.5 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.35 }}
+          />
+        ))}
       </div>
 
-      {/* ── Centered content ── */}
-      <div className="max-w-3xl mx-auto w-full relative z-10 flex flex-col items-center text-center gap-6">
+      {/* ── Content ── */}
+      <div className="max-w-5xl mx-auto w-full relative z-10 flex flex-col items-center text-center pt-20 pb-16">
 
-        {/* Photo — floating */}
-        <motion.div
-          className="relative"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
-          transition={{
-            opacity: { duration: 0.6 },
-            scale: { duration: 0.6 },
-            y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.6 },
-          }}
-        >
-          {/* Glow behind photo */}
-          <motion.div
-            className="absolute inset-0 rounded-full blur-2xl scale-125"
-            style={{ background: 'linear-gradient(135deg, #f97316, #f43f5e)', opacity: 0.55 }}
-            animate={{ opacity: [0.55, 0.82, 0.55] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <div
-            className="relative w-40 h-40 sm:w-52 sm:h-52 rounded-full overflow-hidden shadow-2xl"
-            style={{ border: '3px solid rgba(249,115,22,0.45)' }}
-          >
-            <img
-              src="/projets/fotoFacu.jpeg"
-              alt="Facundo Thibaut"
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
-          {/* Online dot */}
-          <div
-            className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 flex items-center justify-center"
-            style={{ background: '#10b981', borderColor: '#0a0b14' }}
-          >
-            <motion.div
-              className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full"
-              style={{ background: '#10b981' }}
-              animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
-
-        {/* Available badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
+        {/* "Hola, soy —" */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full tracking-widest border"
-          style={{ background: 'rgba(16,185,129,0.1)', borderColor: 'rgba(16,185,129,0.25)', color: '#10b981' }}
+          transition={{ delay: 0.15, duration: 0.6 }}
+          className="text-white/45 text-xl sm:text-2xl mb-6 leading-none select-none"
+          style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic' }}
         >
-          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10b981' }} />
-          Disponible para proyectos
-        </motion.div>
+          Hola, soy —
+        </motion.p>
 
-        {/* Name — big and centered */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+        {/* Name block */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-none"
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="flex flex-col items-center"
         >
-          Facundo<br />
-          <span style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          {/* FACUNDO — massive uppercase gradient */}
+          <h1
+            className="font-black uppercase leading-none select-none"
+            style={{
+              fontSize: 'clamp(72px, 17.5vw, 210px)',
+              background: 'linear-gradient(90deg, #f97316 0%, #f43f5e 38%, #fbbf24 68%, #f97316 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              lineHeight: 0.88,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            FACUNDO
+          </h1>
+
+          {/* Thibaut — serif italic */}
+          <p
+            className="leading-none select-none"
+            style={{
+              fontSize: 'clamp(52px, 13vw, 160px)',
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontStyle: 'italic',
+              fontWeight: 400,
+              background: 'linear-gradient(90deg, #f43f5e, #f97316 55%, #f43f5e)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              lineHeight: 1.0,
+              marginTop: '0.04em',
+            }}
+          >
             Thibaut
-          </span>
-        </motion.h1>
+          </p>
+        </motion.div>
 
         {/* Role */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.55 }}
-          className="text-lg sm:text-xl font-semibold tracking-wide"
-          style={{ color: '#f97316' }}
+          transition={{ delay: 0.65 }}
+          className="text-white/45 text-xs sm:text-sm tracking-[0.28em] uppercase mt-8 mb-6"
         >
-          Desarrollador Web Freelance
+          · Desarrollador Web Freelance ·
         </motion.p>
 
         {/* Description */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.65 }}
-          className="text-white/40 text-base sm:text-lg max-w-lg leading-relaxed"
+          transition={{ delay: 0.75 }}
+          className="text-white/45 text-base sm:text-lg max-w-xl leading-relaxed mb-8"
         >
-          Creo sitios web que captan clientes y hacen crecer tu negocio.
+          Creo sitios web que{' '}
+          <span className="text-white/80 font-semibold">captan clientes</span>{' '}
+          y hacen crecer tu negocio.
           Diseño, desarrollo y lanzamiento en tiempo récord.
         </motion.p>
 
@@ -131,8 +137,8 @@ export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.75 }}
-          className="flex flex-col sm:flex-row items-center gap-3"
+          transition={{ delay: 0.85 }}
+          className="flex flex-col sm:flex-row items-center gap-3 mb-8"
         >
           <motion.a
             href="https://wa.me/541171247355"
@@ -148,7 +154,7 @@ export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
           </motion.a>
           <motion.button
             onClick={() => scrollTo('servicios')}
-            className="flex items-center gap-2 text-white/50 hover:text-white font-medium text-sm px-5 py-3.5 rounded-2xl border border-white/10 hover:border-white/20 hover:bg-white/5 transition-all"
+            className="flex items-center gap-2 text-white/50 hover:text-white font-medium text-sm px-6 py-3.5 rounded-2xl border border-white/12 hover:border-white/25 hover:bg-white/5 transition-all"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
@@ -156,23 +162,22 @@ export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
           </motion.button>
         </motion.div>
 
-        {/* Tech — código real */}
+        {/* Tech strip */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: 1 }}
           className="flex items-center gap-2 flex-wrap justify-center"
         >
-          <Code2 size={13} className="text-white/20 shrink-0" />
+          <Code2 size={12} className="text-white/20" />
           <span className="text-white/20 text-xs font-mono">Código real, sin page builders:</span>
           {TECH.map(t => (
             <span key={t} className="text-[11px] font-mono px-2 py-0.5 rounded border"
-              style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}>
+              style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.32)' }}>
               {t}
             </span>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

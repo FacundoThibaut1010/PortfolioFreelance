@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
 
-const STACK = ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Node.js', 'Vercel'];
+const STATS = [
+  { value: '2+',   label: 'Años de\nexperiencia',     accent: '#f97316' },
+  { value: '15+',  label: 'Proyectos\ncompletados',   accent: '#f43f5e' },
+  { value: '24hs', label: 'Tiempo de\nrespuesta',     accent: '#10b981' },
+  { value: '100%', label: 'Código\na medida',         accent: '#f59e0b' },
+];
 
 export const About = () => {
   return (
@@ -8,14 +13,24 @@ export const About = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* ── Photo (same style as Hero) ── */}
+          {/* ── Left: badge + photo ── */}
           <motion.div
-            className="flex justify-center"
+            className="flex flex-col items-center gap-6"
             initial={{ opacity: 0, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.65 }}
           >
+            {/* Disponible badge */}
+            <div
+              className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full tracking-widest border"
+              style={{ background: 'rgba(16,185,129,0.1)', borderColor: 'rgba(16,185,129,0.25)', color: '#10b981' }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10b981' }} />
+              Disponible para proyectos
+            </div>
+
+            {/* Photo — floating with glow */}
             <motion.div
               className="relative"
               animate={{ y: [0, -14, 0] }}
@@ -25,13 +40,18 @@ export const About = () => {
               <motion.div
                 className="absolute inset-0 rounded-full blur-2xl scale-125"
                 style={{ background: 'linear-gradient(135deg, #f97316, #f43f5e)', opacity: 0.45 }}
-                animate={{ opacity: [0.45, 0.7, 0.45] }}
+                animate={{ opacity: [0.45, 0.72, 0.45] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              {/* Decorative ring */}
+              <div
+                className="absolute -inset-5 rounded-full border opacity-15 pointer-events-none"
+                style={{ borderColor: '#f97316', borderStyle: 'dashed' }}
               />
               {/* Photo */}
               <div
                 className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden shadow-2xl"
-                style={{ border: '3px solid rgba(249,115,22,0.4)' }}
+                style={{ border: '3px solid rgba(249,115,22,0.42)' }}
               >
                 <img
                   src="/projets/fotoFacu.jpeg"
@@ -39,15 +59,10 @@ export const About = () => {
                   className="w-full h-full object-cover object-top"
                 />
               </div>
-              {/* Decorative ring */}
-              <div
-                className="absolute -inset-4 rounded-full border opacity-20 pointer-events-none"
-                style={{ borderColor: '#f97316' }}
-              />
             </motion.div>
           </motion.div>
 
-          {/* ── Text ── */}
+          {/* ── Right: text + stat cards ── */}
           <motion.div
             initial={{ opacity: 0, x: 28 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -69,29 +84,31 @@ export const About = () => {
             </p>
 
             <p className="text-white/35 text-base leading-relaxed mb-8">
-              Sin Wix. Sin WordPress. Sin templates de terceros. Cada proyecto es construido desde cero con React y TypeScript para que tu sitio sea único, veloz y fácil de escalar.
+              Sin Wix. Sin WordPress. Sin templates. Cada proyecto es construido desde cero para que tu sitio sea único, veloz y diferente.
             </p>
 
             {/* Accent line */}
             <div className="h-[2px] w-14 rounded-full mb-8" style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)' }} />
 
-            {/* Stack */}
-            <p className="text-white/25 text-xs font-mono uppercase tracking-widest mb-3">Stack técnico</p>
-            <div className="flex flex-wrap gap-2">
-              {STACK.map((tech, i) => (
-                <motion.span
-                  key={tech}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+            {/* Stat cards — small 2x2 grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.06 }}
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.94 }}
-                  className="text-xs font-mono font-semibold px-3 py-1.5 rounded-full border cursor-default"
-                  style={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
+                  whileHover={{ y: -4, boxShadow: `0 12px 30px ${stat.accent}18` }}
+                  whileTap={{ scale: 0.97 }}
+                  className="rounded-xl p-4 border cursor-default"
+                  style={{ background: '#111220', borderColor: `${stat.accent}22` }}
                 >
-                  {tech}
-                </motion.span>
+                  {/* Top accent */}
+                  <div className="h-[2px] w-8 rounded-full mb-3" style={{ background: stat.accent }} />
+                  <p className="text-2xl sm:text-3xl font-black text-white leading-none mb-1">{stat.value}</p>
+                  <p className="text-xs text-white/38 leading-snug whitespace-pre-line">{stat.label}</p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
