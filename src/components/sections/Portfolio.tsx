@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ShoppingCart, Heart, ChevronDown } from 'lucide-react';
+import { ExternalLink, ShoppingCart, Heart, X, Eye } from 'lucide-react';
 
 const PROJECTS = [
   {
@@ -26,11 +26,12 @@ const PROJECTS = [
 ];
 
 export const Portfolio = () => {
-  const [open, setOpen] = useState<number | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const proj = selected !== null ? PROJECTS[selected] : null;
 
   return (
     <section id="trabajos" className="py-20 sm:py-28 px-5 sm:px-8" style={{ background: '#0d0e1a' }}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -42,134 +43,162 @@ export const Portfolio = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-3 mb-4 tracking-tight">
             Proyectos reales
           </h2>
-          <p className="text-white/40 text-lg max-w-xl mx-auto">Sitios online generando resultados.</p>
+          <p className="text-white/40 text-lg max-w-xl mx-auto">Sitios online generando resultados. Hacé click para ver más.</p>
         </motion.div>
 
-        <div className="space-y-3">
-          {PROJECTS.map((proj, i) => {
-            const TypeIcon = proj.typeIcon;
-            const isOpen = open === i;
-
+        {/* Image grid — clickable */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {PROJECTS.map((p, i) => {
+            const TypeIcon = p.typeIcon;
             return (
-              <motion.div
-                key={proj.name}
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
+              <motion.button
+                key={p.name}
+                onClick={() => setSelected(i)}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="rounded-2xl overflow-hidden border"
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                whileHover={{ y: -6 }}
+                className="group relative rounded-2xl overflow-hidden border text-left"
                 style={{
                   background: '#111220',
-                  borderColor: isOpen ? `${proj.accent}50` : 'rgba(255,255,255,0.06)',
-                  transition: 'border-color 0.3s',
+                  borderColor: 'rgba(255,255,255,0.06)',
+                  boxShadow: '0 0 0px transparent',
                 }}
               >
-                {/* Clickable header row */}
-                <motion.button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center gap-5 px-6 py-5 text-left group"
-                  whileHover={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
-                >
-                  {/* Number */}
-                  <span
-                    className="text-4xl font-black font-mono leading-none shrink-0 w-10 select-none transition-colors"
-                    style={{ color: isOpen ? proj.accent : 'rgba(255,255,255,0.08)' }}
-                  >
-                    0{i + 1}
-                  </span>
+                {/* Top accent */}
+                <div className="h-[2px]" style={{ background: p.accent }} />
 
-                  {/* Name */}
-                  <h3
-                    className="flex-1 text-lg sm:text-xl font-bold transition-colors"
-                    style={{ color: isOpen ? proj.accent : 'rgba(255,255,255,0.85)' }}
-                  >
-                    {proj.name}
-                  </h3>
+                {/* Image */}
+                <div className="relative overflow-hidden h-56 sm:h-64">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-75 group-hover:opacity-100"
+                  />
 
-                  {/* Type badge */}
-                  <div
-                    className="hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold border shrink-0"
-                    style={{
-                      background: `${proj.accent}15`,
-                      borderColor: `${proj.accent}35`,
-                      color: proj.accent,
-                    }}
-                  >
-                    <TypeIcon size={11} />
-                    {proj.type}
+                  {/* Bottom gradient + name */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-5">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <span
+                          className="text-[10px] font-bold px-2.5 py-1 rounded-full border flex items-center gap-1"
+                          style={{ background: `${p.accent}20`, borderColor: `${p.accent}40`, color: p.accent }}
+                        >
+                          <TypeIcon size={10} /> {p.type}
+                        </span>
+                      </div>
+                      <p className="text-white font-bold text-lg leading-tight">{p.name}</p>
+                    </div>
                   </div>
 
-                  {/* Chevron */}
-                  <motion.div
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{
-                      background: isOpen ? `${proj.accent}20` : 'rgba(255,255,255,0.05)',
-                      color: isOpen ? proj.accent : 'rgba(255,255,255,0.3)',
-                    }}
-                  >
-                    <ChevronDown size={16} />
-                  </motion.div>
-                </motion.button>
-
-                {/* Expanded content */}
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
-                      style={{ overflow: 'hidden' }}
-                    >
-                      <div className="px-6 pb-6" style={{ borderTop: `1px solid rgba(255,255,255,0.05)` }}>
-                        <div className="flex flex-col sm:flex-row gap-6 pt-5">
-                          {/* Image */}
-                          <div className="sm:w-56 shrink-0 rounded-xl overflow-hidden h-36 sm:h-auto">
-                            <img
-                              src={proj.image}
-                              alt={proj.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-
-                          {/* Info */}
-                          <div className="flex flex-col gap-4 flex-1">
-                            <p className="text-white/45 text-sm leading-relaxed">{proj.desc}</p>
-
-                            <div className="flex flex-wrap gap-2">
-                              {proj.tags.map(tag => (
-                                <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full border"
-                                  style={{ background: `${proj.accent}10`, borderColor: `${proj.accent}25`, color: proj.accent }}>
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-
-                            <motion.a
-                              href={proj.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="self-start inline-flex items-center gap-2 font-bold text-sm py-2.5 px-5 rounded-xl text-white"
-                              style={{ background: `${proj.accent}20`, border: `1px solid ${proj.accent}40`, color: proj.accent }}
-                              whileHover={{ scale: 1.04, background: `${proj.accent}30` }}
-                              whileTap={{ scale: 0.97 }}
-                            >
-                              Ver sitio en vivo <ExternalLink size={13} />
-                            </motion.a>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                  {/* Eye icon — hover hint */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
+                    <div className="w-9 h-9 rounded-full bg-black/60 backdrop-blur flex items-center justify-center border border-white/20">
+                      <Eye size={15} className="text-white" />
+                    </div>
+                  </div>
+                </div>
+              </motion.button>
             );
           })}
         </div>
       </div>
+
+      {/* ── Modal ── */}
+      <AnimatePresence>
+        {proj && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              className="fixed inset-0 z-50 bg-black/70"
+              style={{ backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelected(null)}
+            />
+
+            {/* Modal panel */}
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+              onClick={() => setSelected(null)}
+            >
+              <motion.div
+                key="modal"
+                className="relative w-full max-w-lg rounded-2xl overflow-hidden border"
+                style={{ background: '#111220', borderColor: `${proj.accent}40` }}
+                initial={{ scale: 0.85, opacity: 0, y: 30 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.85, opacity: 0, y: 20 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+                onClick={e => e.stopPropagation()}
+              >
+                {/* Top accent */}
+                <div className="h-[2px]" style={{ background: proj.accent }} />
+
+                {/* Close btn */}
+                <button
+                  onClick={() => setSelected(null)}
+                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                  style={{ background: 'rgba(0,0,0,0.55)', color: 'rgba(255,255,255,0.7)' }}
+                >
+                  <X size={15} />
+                </button>
+
+                {/* Project image */}
+                <div className="h-52 sm:h-60 overflow-hidden">
+                  <img
+                    src={proj.image}
+                    alt={proj.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  {/* Type badge */}
+                  <div className="flex items-center gap-1.5 mb-3">
+                    <span
+                      className="text-[10px] font-bold px-2.5 py-1 rounded-full border flex items-center gap-1"
+                      style={{ background: `${proj.accent}15`, borderColor: `${proj.accent}35`, color: proj.accent }}
+                    >
+                      {proj.type}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-2">{proj.name}</h3>
+                  <p className="text-white/45 text-sm leading-relaxed mb-5">{proj.desc}</p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {proj.tags.map(tag => (
+                      <span key={tag} className="text-xs font-semibold px-3 py-1 rounded-full border"
+                        style={{ background: `${proj.accent}10`, borderColor: `${proj.accent}25`, color: proj.accent }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <motion.a
+                    href={proj.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 text-white font-bold text-sm py-3.5 px-6 rounded-xl w-full"
+                    style={{ background: `linear-gradient(135deg, ${proj.accent}, ${proj.accent}cc)`, boxShadow: `0 0 24px ${proj.accent}40` }}
+                    whileHover={{ scale: 1.03, boxShadow: `0 8px 30px ${proj.accent}55` }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    Ver sitio en vivo <ExternalLink size={14} />
+                  </motion.a>
+                </div>
+              </motion.div>
+            </div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

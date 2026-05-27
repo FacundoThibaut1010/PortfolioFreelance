@@ -4,7 +4,7 @@ export const Footer = () => {
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>
+            style={{ background: 'linear-gradient(135deg, #f97316, #f43f5e)' }}>
             <span className="text-white font-black text-[10px] font-mono">FT</span>
           </div>
           <span className="text-white/60 font-semibold text-sm">Facundo Thibaut</span>
