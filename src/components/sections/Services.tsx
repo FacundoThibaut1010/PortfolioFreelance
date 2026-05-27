@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Layout, LayoutGrid, ShoppingCart, Check } from 'lucide-react';
 
+const GRID_BG = 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)';
+
 const SERVICES = [
   {
     icon: Layout,
@@ -52,8 +54,28 @@ const SERVICES = [
 
 export const Services = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
   return (
-    <section id="servicios" className="py-20 sm:py-28 px-5 sm:px-8" style={{ background: '#0a0b14' }}>
-      <div className="max-w-6xl mx-auto">
+    <section id="servicios" className="relative py-20 sm:py-28 px-5 sm:px-8 overflow-hidden" style={{ background: '#07080f' }}>
+
+      {/* Background: same as Hero */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.14), transparent 70%)' }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(244,63,94,0.1), transparent 70%)' }}
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 13, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+        />
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-[0.018]"
+          style={{ backgroundImage: GRID_BG, backgroundSize: '60px 60px' }} />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
 
         {/* Header */}
         <motion.div

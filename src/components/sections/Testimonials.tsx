@@ -61,7 +61,7 @@ export const Testimonials = () => {
   };
 
   return (
-    <section id="resenas" className="py-20 sm:py-28 px-5 sm:px-8" style={{ background: '#0a0b14' }}>
+    <section id="resenas" className="pt-20 sm:pt-28 pb-10 sm:pb-14 px-5 sm:px-8" style={{ background: '#0d0e1a' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.div

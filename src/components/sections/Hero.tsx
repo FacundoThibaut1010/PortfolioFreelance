@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Code2 } from 'lucide-react';
-
-const TECH = ['React', 'TypeScript', 'Vite', 'Tailwind CSS'];
+import { ArrowRight } from 'lucide-react';
 
 // Small scattered decorative dots (like the reference image)
 const DOTS = [
@@ -162,22 +160,6 @@ export const Hero = ({ scrollTo }: { scrollTo: (id: string) => void }) => {
           </motion.button>
         </motion.div>
 
-        {/* Tech strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="flex items-center gap-2 flex-wrap justify-center"
-        >
-          <Code2 size={12} className="text-white/20" />
-          <span className="text-white/20 text-xs font-mono">Código real, sin page builders:</span>
-          {TECH.map(t => (
-            <span key={t} className="text-[11px] font-mono px-2 py-0.5 rounded border"
-              style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.32)' }}>
-              {t}
-            </span>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

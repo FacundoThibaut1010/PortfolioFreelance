@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowRight } from 'lucide-react';
 
+const InstagramIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-[15px] h-[15px]" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4.5"/>
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+);
+
 const WA_NUMBER = '541171247355';
 
 export const Contact = () => {
@@ -67,8 +75,8 @@ export const Contact = () => {
               <ArrowRight size={17} />
             </motion.a>
 
-            {/* Mail + location */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-white/30">
+            {/* Mail + Instagram + location */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 text-sm text-white/30 flex-wrap">
               <motion.a
                 href="mailto:thibautfacundo7@gmail.com"
                 className="flex items-center gap-2 hover:text-white/60 transition-colors"
@@ -76,6 +84,16 @@ export const Contact = () => {
               >
                 <Mail size={15} />
                 thibautfacundo7@gmail.com
+              </motion.a>
+              <motion.a
+                href="https://instagram.com/facundo.thibaut"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-white/60 transition-colors"
+                whileHover={{ scale: 1.03 }}
+              >
+                <InstagramIcon />
+                @facundo.thibaut
               </motion.a>
               <div className="flex items-center gap-2">
                 <MapPin size={15} />

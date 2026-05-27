@@ -48,8 +48,11 @@ export const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 px-5 sm:px-8" style={{ background: '#0a0b14' }}>
+    <section id="faq" className="pt-8 sm:pt-10 pb-20 sm:pb-28 px-5 sm:px-8 relative" style={{ background: '#0d0e1a' }}>
+      {/* Thin separator from Testimonials */}
       <div className="max-w-6xl mx-auto">
+        <div className="h-px mb-12 sm:mb-16"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)' }} />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

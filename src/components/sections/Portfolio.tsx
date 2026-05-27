@@ -30,7 +30,7 @@ export const Portfolio = () => {
   const proj = selected !== null ? PROJECTS[selected] : null;
 
   return (
-    <section id="trabajos" className="py-20 sm:py-28 px-5 sm:px-8" style={{ background: '#0d0e1a' }}>
+    <section id="trabajos" className="py-20 sm:py-28 px-5 sm:px-8" style={{ background: '#161728' }}>
       <div className="max-w-6xl mx-auto">
 
         <motion.div
