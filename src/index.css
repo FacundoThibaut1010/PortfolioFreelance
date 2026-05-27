@@ -4,14 +4,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design tokens ── */
+:root {
+  --bg-0: #07080f;
+  --bg-1: #0a0b14;
+  --bg-2: #0d0e1a;
+  --bg-3: #111220;
+  --rgb-fg: 255, 255, 255;
+  --nav-scrolled: rgba(10,11,20,0.82);
+  --nav-idle:     rgba(10,11,20,0.45);
+  --nav-bdr-s:    rgba(255,255,255,0.06);
+  --nav-bdr:      rgba(255,255,255,0.02);
+  --mob-overlay:  linear-gradient(160deg, #0a0b14 0%, #100a1c 100%);
+}
+
+[data-theme="light"] {
+  --bg-0: #f5f4ef;
+  --bg-1: #f8f7f2;
+  --bg-2: #ede9e3;
+  --bg-3: #ffffff;
+  --rgb-fg: 10, 11, 20;
+  --nav-scrolled: rgba(245,244,239,0.92);
+  --nav-idle:     rgba(245,244,239,0.72);
+  --nav-bdr-s:    rgba(10,11,20,0.09);
+  --nav-bdr:      rgba(10,11,20,0.04);
+  --mob-overlay:  linear-gradient(160deg, #f8f7f2 0%, #ede9e3 100%);
+}
+
 @layer base {
   body {
-    background-color: #0a0b14;
-    @apply font-sans antialiased text-white;
+    background-color: var(--bg-1);
+    @apply font-sans antialiased;
     scroll-behavior: smooth;
   }
-
-  h1, h2, h3, h4 {
-    @apply font-display;
-  }
+  h1, h2, h3, h4 { @apply font-display; }
 }
+
+/* Typewriter cursor blink */
+@keyframes tw-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.tw-cursor { animation: tw-blink 0.9s step-end infinite; }
